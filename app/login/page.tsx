@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Form } from 'app/form';
 import { signIn } from 'app/auth';
-import { SubmitButton } from 'app/submit-button';
+import { SubmitButton } from '@/app/components/ui/submit-button';
 
 export default function Login() {
   return (
