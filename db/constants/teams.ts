@@ -1,4 +1,3 @@
-import { MLB_TEAMS } from './teams';
 import { pgEnum  } from 'drizzle-orm/pg-core';
 
 // export type MLB_TEAM =
