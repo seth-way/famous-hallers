@@ -1,0 +1,4 @@
+Sitemap: https://hallers.dev/sitemap.xml
+
+User-agent: *
+Disallow: /api
