@@ -9,8 +9,11 @@
       "@/components/*": ["components/*"],
       "@/pages/*": ["pages/*"],
       "@/app/*": ["app/*"],
+      "@/db/*": ["db/*"],
       "@/lib/*": ["lib/*"],
-      "@/styles/*": ["styles/*"]
+      "@/styles/*": ["styles/*"],
+      "@/types/*": ["lib/types/*"],
+      "@/env": ["env/index"]
     },
     "strict": true,
     "forceConsistentCasingInFileNames": true,
