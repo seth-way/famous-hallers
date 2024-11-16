@@ -1,30 +1,38 @@
 "use client";
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import useScroll from "@/lib/hooks/use-scroll";
-import { Home, User, UserCheck } from "lucide-react";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Link,
+  Button,
+} from "@nextui-org/react";
+import Logo from "@/app/assets/svgs/Logo";
 
 export default function NavBar() {
-  const scrolled = useScroll(50);
-
   return (
-    <>
-      <div
-        className={`fixed top-0 flex w-full justify-center ${
-          scrolled
-            ? "border-b border-black bg-white/20 backdrop-blur-xl"
-            : "bg-white/0"
-        } z-30 transition-all`}
-      >
-        <div className="mx-5 flex h-16 w-full max-w-screen-xl items-center justify-between">
-          <Link href="/" className="flex items-center font-display text-2xl">
-            <Home color="white"/>
+    <Navbar isBordered>
+      <NavbarBrand>
+        <Logo fill="pink" height="50" />
+        <p className="pl-2 font-bold text-inherit">Famous Hallers</p>
+      </NavbarBrand>
+      <NavbarContent className="hidden gap-4 sm:flex" justify="center">
+        <NavbarItem>
+          <Link color="foreground" href="#">
+            Sample Link
           </Link>
-          <Link href="/" className="flex items-center font-display text-2xl">
-            <User color="white"/>
-          </Link>
-        </div>
-      </div>
-    </>
+        </NavbarItem>
+      </NavbarContent>
+      <NavbarContent justify="end">
+        <NavbarItem className="hidden lg:flex">
+          <Link href="#">Login</Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Button as={Link} color="primary" href="#" variant="flat">
+            Sign Up
+          </Button>
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
   );
 }
