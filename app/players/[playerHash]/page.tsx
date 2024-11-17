@@ -4,10 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import { decryptHash } from "@/lib/api";
 import { IPlayerInfo } from "@/lib/types";
 import Loading from "@/app/components/ui/loading";
+import Profile from "@/app/components/ui/profile";
 import Score, { ScoreRef } from "@/app/components/ui/score";
 
 export default function Page() {
   const [playerInfo, setPlayerInfo] = useState<IPlayerInfo | null>(null);
+  const [revealPlayer, setRevealPlayer] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const scoreRef = useRef<ScoreRef>(null);
   const playerHash = useParams().playerHash as string;
@@ -33,16 +35,37 @@ export default function Page() {
 
     if (playerHash) fetchPlayerInfo();
   }, [playerHash]);
-  if (error) return <Loading />;
-  return playerInfo ? (
+
+  if (error || !playerInfo) return <Loading />;
+  console.log(playerInfo);
+  const {
+    awards,
+    college,
+    draft,
+    first_name: firstName,
+    img,
+    last_name: lastName,
+    league,
+    position,
+    teams,
+  } = playerInfo;
+
+  return (
     <>
-      <div className="flex">
+      <div
+        className="align-stretch flex w-full justify-center gap-4"
+        onClick={() => setRevealPlayer(true)}
+      >
+        <Profile
+          firstName={firstName}
+          lastName={lastName}
+          position={position}
+          img={img}
+          reveal={revealPlayer}
+        />
         <Score ref={scoreRef} runScoreTimer={true} guessCount={0} />
       </div>
-      <div className="flex">{playerInfo.first_name}</div>
     </>
-  ) : (
-    <Loading />
   );
 }
 4;

@@ -33,17 +33,19 @@ const Score = forwardRef<ScoreRef, ScoreProps>(
     }));
 
     return (
-      <div className="flex flex-col items-center gap-1 md:text-2xl font-semibold">
-        <h2>Current Score</h2>
-        <Card className="h-32 w-32 border border-gray-200 bg-gradient-to-br from-violet-500 to-fuchsia-500 md:h-60 md:w-60">
+      <div className="flex flex-col items-center gap-1 font-semibold md:text-2xl">
+        <Card
+          isBlurred
+          className="border-black h-24 w-24 border bg-gradient-to-br from-success-600/50 to-success-200/50 md:h-60 md:w-60"
+        >
           <CardBody className="items-center justify-center py-0">
             <CircularProgress
               classNames={{
                 svgWrapper: "absolute top-0 left-0 right-0 bottom-0",
                 svg: "w-full h-full drop-shadow-md",
-                indicator: "stroke-white",
-                track: "stroke-white/10",
-                label: "font-semibold text-white md:text-2xl",
+                indicator: "stroke-khaki-300",
+                track: "stroke-khaki/30",
+                label: "font-semibold text-white text-xs md:text-2xl",
               }}
               strokeWidth={4}
               aria-label="Current Score"
@@ -53,6 +55,7 @@ const Score = forwardRef<ScoreRef, ScoreProps>(
             />
           </CardBody>
         </Card>
+        <h2>Score</h2>
       </div>
     );
   },

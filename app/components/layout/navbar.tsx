@@ -11,9 +11,9 @@ import Logo from "@/app/assets/svgs/Logo";
 
 export default function NavBar() {
   return (
-    <Navbar isBordered>
+    <Navbar isBordered className="bg-gunmetal-800">
       <NavbarBrand>
-        <Logo fill="pink" height="50" />
+        <Logo fill="hsl(var(--nextui-success-300))" height="50" />
         <p className="pl-2 font-bold text-inherit">Famous Hallers</p>
       </NavbarBrand>
       <NavbarContent className="hidden gap-4 sm:flex" justify="center">
@@ -28,7 +28,7 @@ export default function NavBar() {
           <Link href="#">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
+          <Button as={Link} color="success" href="#" variant="flat">
             Sign Up
           </Button>
         </NavbarItem>
