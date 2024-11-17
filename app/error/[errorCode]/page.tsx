@@ -1,30 +1,28 @@
-import { useRouter } from 'next/navigation';
+"use client";
+import { useParams, useRouter } from "next/navigation";
 
-type ErrorPageProps = {
-  params: {
-    errorCode: string;
-  };
-};
-
-const ErrorPage = ({ params }: ErrorPageProps) => {
-  const { errorCode } = params;
+const ErrorPage = () => {
+  const errorCode = useParams().errorCode as string;
   const router = useRouter();
 
   const errorMessages: { [key: string]: string } = {
-    404: 'Page Not Found',
-    500: 'Internal Server Error',
-    default: 'An unexpected error has occurred',
+    404: "Page Not Found",
+    500: "Internal Server Error",
+    default: "An unexpected error has occurred",
   };
 
-  const errorMessage = errorMessages[errorCode] || errorMessages.default;
+  const errorMessage =
+    errorCode && errorMessages[errorCode]
+      ? errorMessages[errorCode]
+      : errorMessages.default;
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen text-center">
+    <div className="flex h-screen flex-col items-center justify-center text-center">
       <h1 className="text-4xl font-bold">{errorCode}</h1>
       <p className="text-lg">{errorMessage}</p>
       <button
-        onClick={() => router.push('/')}
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+        onClick={() => router.push("/")}
+        className="mt-4 rounded bg-blue-500 px-4 py-2 text-white"
       >
         Go Back Home
       </button>
