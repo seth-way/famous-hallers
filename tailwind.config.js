@@ -56,7 +56,7 @@ module.exports = {
         "slide-up-fade": "slide-up-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
         "slide-down-fade": "slide-down-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
         // Gradient Pulse
-        "gradient-pulse": "gradient-pulse 3s ease-in-out infinite",
+        "pulse-subtle": "pulse-subtle 3s ease-in-out infinite",
       },
       keyframes: {
         // Fade up, down, in
@@ -99,12 +99,12 @@ module.exports = {
             transform: "translate(0px, 0px)",
           },
         },
-        "gradient-pulse": {
+        "pulse-subtle": {
           "0%, 100%": {
-            backgroundPosition: "0% 50%",
+            opacity: 1,
           },
           "50%": {
-            backgroundPosition: "100% 50%",
+            opacity: 0.8,
           },
         },
         // Tooltip

@@ -36,7 +36,7 @@ const Score = forwardRef<ScoreRef, ScoreProps>(
       <div className="flex flex-col items-center gap-1 font-semibold md:text-2xl">
         <Card
           isBlurred
-          className="border-black h-24 w-24 border bg-gradient-to-br from-success-600/50 to-success-200/50 md:h-60 md:w-60"
+          className="h-24 w-24 rounded-lg bg-gradient-to-br from-success-500/60 to-success-100/50 md:h-60 md:w-60"
         >
           <CardBody className="items-center justify-center py-0">
             <CircularProgress

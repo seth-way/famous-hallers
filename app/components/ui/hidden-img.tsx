@@ -41,11 +41,16 @@ export default function HiddenImg({ src, alt, reveal }: HiddenImgProps) {
   }, [reveal]);
 
   return (
-    <Card className="h-32 w-20 rounded bg-gradient-to-br from-success-600/50 to-success-200/50 md:h-60 md:w-40">
+    <Card
+      className={
+        "h-32 w-20 rounded-md bg-gradient-to-br from-success-500/60 to-success-100/50 md:h-60 md:w-40" +
+        (reveal ? "" : " animate-pulse-subtle")
+      }
+    >
       <CardBody className="items-center justify-center py-0">
         <motion.div
           className="absolute inset-0"
-          initial={{ clipPath: "inset(0 0 0 100%)" }}
+          initial="hidden"
           animate={isRevealed ? "revealed" : "hidden"}
           variants={profilePic}
         >

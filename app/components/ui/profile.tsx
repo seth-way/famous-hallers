@@ -23,10 +23,25 @@ export default function Profile({
 }: ProfileProps) {
   return (
     <div className="align-stretch flex gap-4">
-      <div className="justify-around flex flex-col items-end">
-        <HiddenInfo text={firstName} width="md" reveal={true} />
-        <HiddenInfo text={lastName} width="md" reveal={true} />
-        <HiddenInfo text={position} width="sm" reveal={true} />
+      <div className="flex flex-col items-end justify-around">
+        <HiddenInfo
+          text={firstName}
+          width="md"
+          placeholder="first"
+          reveal={reveal}
+        />
+        <HiddenInfo
+          text={lastName}
+          width="md"
+          placeholder="last"
+          reveal={reveal}
+        />
+        <HiddenInfo
+          text={position}
+          width="sm"
+          placeholder="pos"
+          reveal={reveal}
+        />
       </div>
       <HiddenImg
         src={img}
