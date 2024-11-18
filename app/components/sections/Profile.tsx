@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardBody, CircularProgress } from "@nextui-org/react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import HiddenImg from "@/app/components/ui/hidden-img";
+import Headshot from "@/app/components/ui/headshot";
 import HiddenInfo from "@/app/components/ui/hidden-info";
 import { UserRound } from "lucide-react";
 
@@ -43,7 +43,7 @@ export default function Profile({
           reveal={reveal}
         />
       </div>
-      <HiddenImg
+      <Headshot
         src={img}
         alt={`${firstName} ${lastName} headshot`}
         reveal={reveal}

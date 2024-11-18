@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { UserRound } from "lucide-react";
 
-type HiddenImgProps = {
+type HeadshotProps = {
   src: string;
   alt: string;
   reveal: boolean;
@@ -27,7 +27,7 @@ const profilePic = {
   },
 };
 
-export default function HiddenImg({ src, alt, reveal }: HiddenImgProps) {
+export default function Headshot({ src, alt, reveal }: HeadshotProps) {
   const [version, setVersion] = useState<"default" | "player">("default");
   const [isRevealed, setIsRevealed] = useState<boolean>(false);
 

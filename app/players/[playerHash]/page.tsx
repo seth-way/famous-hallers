@@ -4,8 +4,11 @@ import { useState, useEffect, useRef } from "react";
 import { decryptHash } from "@/lib/api";
 import { IPlayerInfo } from "@/lib/types";
 import Loading from "@/app/components/ui/loading";
-import Profile from "@/app/components/sections/profiletemp";
+import Profile from "@/app/components/sections/Profile";
 import Score, { ScoreRef } from "@/app/components/ui/score";
+import Draft from "@/app/components/sections/Draft";
+import Teams from "@/app/components/sections/Teams";
+import Awards from "@/app/components/sections/Awards";
 
 export default function Page() {
   const [playerInfo, setPlayerInfo] = useState<IPlayerInfo | null>(null);
@@ -19,10 +22,8 @@ export default function Page() {
     const fetchPlayerInfo = async () => {
       try {
         const playerId = await decryptHash(playerHash);
-        const playerInfoReq = await fetch(
-          `/dummyData/players/${playerId}.json`,
-        );
-        const player = await playerInfoReq.json();
+        const res = await fetch(`/dummyData/players/${playerId}.json`);
+        const player = await res.json();
         if (!player.last_name) throw new Error("error fetching player info");
         setPlayerInfo(player);
       } catch (err) {
@@ -53,7 +54,7 @@ export default function Page() {
   return (
     <>
       <div
-        className="align-stretch flex w-full justify-center gap-4"
+        className="flex w-full items-stretch justify-center gap-4"
         onClick={() => setRevealPlayer(true)}
       >
         <Profile
@@ -64,6 +65,11 @@ export default function Page() {
           reveal={revealPlayer}
         />
         <Score ref={scoreRef} runScoreTimer={true} guessCount={0} />
+      </div>
+      <div className="flex w-full flex-col items-center justify-center gap-4 border md:flex-row md:items-start">
+        <Draft draft={draft} />
+        <Teams />
+        <Awards />
       </div>
     </>
   );

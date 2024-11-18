@@ -6,9 +6,10 @@
 	"college": "ark",
 	"league": "NFL",
 	"draft": {
-		"team": null,
-		"round": null,
-		"overall": null
+		"team": "PHI",
+		"year": 200,
+		"round": 1,
+		"overall": 7
 	},
 	"position": "T",
 	"teams": [

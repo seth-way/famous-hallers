@@ -3,8 +3,8 @@ import { Card, CardBody } from "@nextui-org/react";
 import { motion } from "framer-motion";
 
 type HiddenInfoProps = {
-  text: string;
-  placeholder: string;
+  text: string | number;
+  placeholder?: string;
   reveal: boolean;
   width: "sm" | "md" | "lg" | "xl";
 };
