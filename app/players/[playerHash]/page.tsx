@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { decryptHash } from "@/lib/api";
 import { IPlayerInfo } from "@/lib/types";
 import Loading from "@/app/components/ui/loading";
-import Profile from "@/app/components/ui/profile";
+import Profile from "@/app/components/sections/profiletemp";
 import Score, { ScoreRef } from "@/app/components/ui/score";
 
 export default function Page() {

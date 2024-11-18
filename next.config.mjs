@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["www.pro-football-reference.com"],
+    domains: ["www.pro-football-reference.com", "upload.wikimedia.org"],
   },
 };
 
