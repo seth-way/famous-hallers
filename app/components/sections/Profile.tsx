@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card, CardBody, CircularProgress } from "@nextui-org/react";
+import Section from "@/app/components/ui/section";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Headshot from "@/app/components/ui/headshot";
@@ -22,8 +22,8 @@ export default function Profile({
   reveal,
 }: ProfileProps) {
   return (
-    <Card className="rounded-md bg-[#bdbdbd]/30">
-      <CardBody className="align-stretch flex flex-row gap-2 p-1 md:p-4">
+    <Section>
+      <div className="flex gap-2 md:gap-4">
         <div className="flex flex-col items-end justify-around">
           <HiddenInfo
             text={firstName}
@@ -49,7 +49,7 @@ export default function Profile({
           alt={`${firstName} ${lastName} headshot`}
           reveal={reveal}
         />
-      </CardBody>
-    </Card>
+      </div>
+    </Section>
   );
 }

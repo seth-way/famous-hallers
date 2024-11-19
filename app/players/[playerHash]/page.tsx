@@ -52,7 +52,7 @@ export default function Page() {
   } = playerInfo;
 
   return (
-    <div className="flex h-full w-full flex-col justify-center gap-2 overflow-hidden md:gap-4">
+    <div className="flex h-full w-full flex-col justify-center gap-2 overflow-hidden md:gap-4 md:px-8 md:pb-16 md:pt-20 px-2 pb-12 pt-[70px] ">
       <div
         className="flex w-full items-stretch justify-center gap-2 md:gap-4"
         onClick={() => setRevealPlayer(true)}
@@ -66,7 +66,7 @@ export default function Page() {
         />
         <Score ref={scoreRef} runScoreTimer={true} guessCount={0} />
       </div>
-      <div className="flex max-h-full w-auto items-start justify-center gap-2 overflow-y-scroll md:flex-row md:gap-4">
+      <div className="flex max-h-full w-auto items-start justify-center gap-2 md:flex-row md:gap-4">
         <div className="flex flex-col gap-2 md:flex-row md:gap-4">
           <Draft draft={draft} setError={setError} />
           <Awards awards={awards} />

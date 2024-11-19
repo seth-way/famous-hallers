@@ -1,12 +1,8 @@
 "use client";
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
-
+import Section from "@/app/components/ui/section";
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  Divider,
   Table,
   TableHeader,
   TableColumn,
@@ -60,73 +56,67 @@ export default function Draft({ draft, setError }: DraftProps) {
   }, [draft]);
 
   return (
-    <Card className="rounded-md bg-[#bdbdbd]/30 font-bold">
-      <CardHeader className="justify-center p-1 md:p-3">
-        <h2>Draft Info</h2>
-      </CardHeader>
-      <Divider />
-      <CardBody className="flex h-full w-full flex-col items-center p-1 md:p-4">
-        <Table
-          hideHeader
-          removeWrapper
-          aria-label="Player draft info"
-          className="font-bold"
-          classNames={{ td: "p-1 md:p-2" }}
-        >
-          <TableHeader>
-            <TableColumn>LABEL</TableColumn>
-            <TableColumn>INFO</TableColumn>
-          </TableHeader>
-          <TableBody>
-            <TableRow key="draft-info-1">
-              <TableCell>Team:</TableCell>
-              <TableCell>
-                {draftTeam && draftTeam.logo ? (
-                  <TeamLogo
-                    src={draftTeam.logo}
-                    alt="Draft Team Logo"
-                    reveal={false}
-                  />
-                ) : (
-                  <DummyLogo />
-                )}
-              </TableCell>
-            </TableRow>
-            <TableRow key="draft-info-2">
-              <TableCell>Year:</TableCell>
-              <TableCell>
-                {drafted && year ? (
-                  <HiddenInfo text={year} reveal={false} width="sm" />
-                ) : (
-                  <DummyInfo width="sm" />
-                )}
-              </TableCell>
-            </TableRow>
-            <TableRow key="3">
-              <TableCell>Round:</TableCell>
-              <TableCell>
-                {" "}
-                {drafted && round ? (
-                  <HiddenInfo text={round} reveal={false} width="sm" />
-                ) : (
-                  <DummyInfo width="sm" />
-                )}
-              </TableCell>
-            </TableRow>
-            <TableRow key="draft-info-3">
-              <TableCell>Overall:</TableCell>
-              <TableCell>
-                {" "}
-                {drafted && overall ? (
-                  <HiddenInfo text={overall} reveal={false} width="sm" />
-                ) : (
-                  <DummyInfo width="sm" />
-                )}
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </CardBody>
-    </Card>
+    <Section heading="Draft Info">
+      <Table
+        hideHeader
+        removeWrapper
+        aria-label="Player draft info"
+        className="font-bold"
+        classNames={{ td: "p-1 md:p-2" }}
+      >
+        <TableHeader>
+          <TableColumn>LABEL</TableColumn>
+          <TableColumn>INFO</TableColumn>
+        </TableHeader>
+        <TableBody>
+          <TableRow key="draft-info-1">
+            <TableCell>Team:</TableCell>
+            <TableCell>
+              {draftTeam && draftTeam.logo ? (
+                <TeamLogo
+                  src={draftTeam.logo}
+                  alt="Draft Team Logo"
+                  reveal={false}
+                />
+              ) : (
+                <DummyLogo />
+              )}
+            </TableCell>
+          </TableRow>
+          <TableRow key="draft-info-2">
+            <TableCell>Year:</TableCell>
+            <TableCell>
+              {drafted && year ? (
+                <HiddenInfo text={year} reveal={false} width="sm" />
+              ) : (
+                <DummyInfo width="sm" />
+              )}
+            </TableCell>
+          </TableRow>
+          <TableRow key="3">
+            <TableCell>Round:</TableCell>
+            <TableCell>
+              {" "}
+              {drafted && round ? (
+                <HiddenInfo text={round} reveal={false} width="sm" />
+              ) : (
+                <DummyInfo width="sm" />
+              )}
+            </TableCell>
+          </TableRow>
+          <TableRow key="draft-info-3">
+            <TableCell>Overall:</TableCell>
+            <TableCell>
+              {" "}
+              {drafted && overall ? (
+                <HiddenInfo text={overall} reveal={false} width="sm" />
+              ) : (
+                <DummyInfo width="sm" />
+              )}
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </Section>
   );
 }

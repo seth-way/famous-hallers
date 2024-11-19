@@ -1,18 +1,7 @@
 "use client";
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Divider,
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-} from "@nextui-org/react";
+import Section from "@/app/components/ui/section";
 import HiddenInfo from "@/app/components/ui/hidden-info";
 import TeamLogo from "@/app/components/ui/team-logo";
 import { IPlayerInfo, IAnyTeam } from "@/lib/types";
@@ -55,69 +44,29 @@ export default function Teams({ teams, setError }: TeamsProps) {
     };
     if (teams && teams.length) getTeamsInfo();
   }, [teams]);
-  console.log("teams <><>", teams);
+
   return (
-    <Card className="max-h-full rounded-md bg-[#bdbdbd]/30 font-bold">
-      <CardHeader className="justify-center p-1 md:p-3">
-        <h2>Team History</h2>
-      </CardHeader>
-      <Divider />
-      <CardBody className="flex h-full w-full flex-col items-center gap-2 p-1 md:gap-4 md:p-4">
-        {teamsInfo.length &&
-          teams.map(({ start, end, team }, idx) => (
-            <div
-              className="flex items-center gap-2 md:gap-4"
-              key={`teams-${idx}`}
-            >
-              <HiddenInfo
-                text={`${start} - ${end}`}
-                placeholder="XXXX - XXXX"
-                reveal={true}
-                width="md"
-              />
-              <TeamLogo
-                src={getTeamLogo(team, teamsInfo)}
-                alt="Draft Team Logo"
-                reveal={true}
-              />
-            </div>
-          ))}
-        {/*</CardBody> <Table
-          //   hideHeader
-          //   removeWrapper
-          //   aria-label="Player draft info"
-          //   className="font-bold"
-          //   classNames={{ td: "p-1 md:p-2" }}
-          // >
-          //   <TableHeader>
-          //     <TableColumn>YEARS</TableColumn>
-          //     <TableColumn>TEAM</TableColumn>
-          //   </TableHeader>
-          //   <TableBody>
-          //     {teams.map(({ start, end, team }, idx) => (
-          //       <TableRow key={`team-info-${idx}`}>
-          //         <TableCell>
-          //           <HiddenInfo
-          //             text={`${start} - ${end}`}
-          //             placeholder="XXXX - XXXX"
-          //             reveal={true}
-          //             width="md"
-          //           />
-          //         </TableCell>
-          //         <TableCell>
-          //           <TeamLogo
-          //             src={getTeamLogo(team, teamsInfo)}
-          //             alt="Draft Team Logo"
-          //             reveal={true}
-          //           />
-          //         </TableCell>
-          //       </TableRow>
-          //     ))}
-          //   </TableBody>
-          // </Table>
-        // )} */}
-      </CardBody>
-    </Card>
+    <Section heading="Team History">
+      {teamsInfo.length &&
+        teams.map(({ start, end, team }, idx) => (
+          <div
+            className="flex items-center gap-2 md:gap-4"
+            key={`teams-${idx}`}
+          >
+            <HiddenInfo
+              text={`${start} - ${end}`}
+              placeholder="XXXX - XXXX"
+              reveal={true}
+              width="md"
+            />
+            <TeamLogo
+              src={getTeamLogo(team, teamsInfo)}
+              alt="Draft Team Logo"
+              reveal={true}
+            />
+          </div>
+        ))}
+    </Section>
   );
 }
 
