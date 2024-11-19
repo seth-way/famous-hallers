@@ -1,5 +1,35 @@
 /** @type {import('tailwindcss').Config} */
 const { nextui } = require("@nextui-org/react");
+const nextColors = nextui().config.theme.extend.colors;
+
+const colors = {
+  gunmetal: {
+    DEFAULT: "#1A1A1A",
+    50: "#F5F5F5",
+    100: "#E6E6E6",
+    200: "#BFBFBF",
+    300: "#999999",
+    400: "#4D4D4D",
+    500: "#2E2E2E",
+    600: "#252525",
+    700: "#1C1C1C",
+    800: "#141414",
+    900: "#0A0A0A",
+  },
+  khaki: {
+    DEFAULT: "#F5DEB3",
+    50: "#FFF8EF",
+    100: "#FEF4DF",
+    200: "#FDE9C0",
+    300: "#FBDCA0",
+    400: "#F7CA7F",
+    500: "#F5DEB3", // Default
+    600: "#D5B67A",
+    700: "#B4925F",
+    800: "#937349",
+    900: "#755838",
+  },
+};
 
 module.exports = {
   content: [
@@ -13,32 +43,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        gunmetal: {
-          DEFAULT: "#1A1A1A",
-          50: "#F5F5F5",
-          100: "#E6E6E6",
-          200: "#BFBFBF",
-          300: "#999999",
-          400: "#4D4D4D",
-          500: "#2E2E2E",
-          600: "#252525",
-          700: "#1C1C1C",
-          800: "#141414",
-          900: "#0A0A0A",
-        },
-        khaki: {
-          DEFAULT: "#F5DEB3",
-          50: "#FFF8EF",
-          100: "#FEF4DF",
-          200: "#FDE9C0",
-          300: "#FBDCA0",
-          400: "#F7CA7F",
-          500: "#F5DEB3", // Default
-          600: "#D5B67A",
-          700: "#B4925F",
-          800: "#937349",
-          900: "#755838",
-        },
+        ...colors,
+      },
+      backgroundImage: {
+        radial: `repeating-conic-gradient(
+          from 0deg at 50% 25%,
+          ${colors.gunmetal[700]} 0deg,
+          ${colors.gunmetal[700]} 10deg,
+          ${colors.gunmetal[600]} 10deg,
+          ${colors.gunmetal[600]} 20deg,
+          ${colors.gunmetal[700]} 20deg)`,
+      },
+      backgroundSize: {
+        radial: "100% 100%",
       },
       borderRadius: {
         card: "0.25rem",
@@ -57,6 +74,8 @@ module.exports = {
         "slide-down-fade": "slide-down-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
         // Gradient Pulse
         "pulse-subtle": "pulse-subtle 3s ease-in-out infinite",
+        // Spin Radial Background
+        "spin-bg": "spin-bg 5s linear infinite",
       },
       keyframes: {
         // Fade up, down, in
@@ -115,6 +134,10 @@ module.exports = {
         "slide-down-fade": {
           "0%": { opacity: 0, transform: "translateY(-6px)" },
           "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+        "spin-bg": {
+          "0%": { backgroundPosition: "0% 0%" },
+          "100%": { backgroundPosition: "360deg 0%" },
         },
       },
     },

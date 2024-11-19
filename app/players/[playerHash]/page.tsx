@@ -52,9 +52,9 @@ export default function Page() {
   } = playerInfo;
 
   return (
-    <>
+    <div className="flex h-full w-full flex-col justify-center gap-2 overflow-hidden md:gap-4">
       <div
-        className="flex w-full items-stretch justify-center gap-4"
+        className="flex w-full items-stretch justify-center gap-2 md:gap-4"
         onClick={() => setRevealPlayer(true)}
       >
         <Profile
@@ -66,12 +66,14 @@ export default function Page() {
         />
         <Score ref={scoreRef} runScoreTimer={true} guessCount={0} />
       </div>
-      <div className="flex w-full flex-col items-center justify-center gap-4 border md:flex-row md:items-start">
-        <Draft draft={draft} />
-        <Teams />
-        <Awards />
+      <div className="flex max-h-full w-auto items-start justify-center gap-2 overflow-y-scroll md:flex-row md:gap-4">
+        <div className="flex flex-col gap-2 md:flex-row md:gap-4">
+          <Draft draft={draft} setError={setError} />
+          <Awards awards={awards} />
+        </div>
+        <Teams teams={teams} setError={setError} />
       </div>
-    </>
+    </div>
   );
 }
 4;

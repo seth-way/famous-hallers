@@ -6,7 +6,7 @@ import {
   NHL_TEAMS,
 } from "@/db/constants/teams";
 
-type IAnyTeam =
+export type IAnyTeam =
   | typeof MLB_TEAMS
   | typeof NBA_TEAMS
   | typeof NFL_TEAMS

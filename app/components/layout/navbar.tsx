@@ -13,7 +13,7 @@ export default function NavBar() {
   return (
     <Navbar isBordered className="bg-gunmetal-800">
       <NavbarBrand>
-        <Logo fill="hsl(var(--nextui-success-300))" height="50" />
+        <Logo className="text-success-300/50" height="50" />
         <p className="pl-2 font-bold text-inherit">Famous Hallers</p>
       </NavbarBrand>
       <NavbarContent className="hidden gap-4 sm:flex" justify="center">

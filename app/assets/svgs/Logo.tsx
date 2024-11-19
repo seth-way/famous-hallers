@@ -2,16 +2,12 @@ import React from "react";
 
 type LogoProps = React.SVGProps<SVGSVGElement>;
 
-export default function Logo({
-  height = "100",
-  fill = "#000",
-  ...rest
-}: LogoProps) {
+export default function Logo({ height = "100", ...rest }: LogoProps) {
   return (
     <svg
       height={height}
       width={height}
-      fill={fill}
+      fill="currentColor"
       {...rest}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"

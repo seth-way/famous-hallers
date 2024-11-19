@@ -10,8 +10,8 @@ type HiddenInfoProps = {
 };
 // potential widths -> 2, 4, 6, 8, 12, 16, 20, 24, 32
 const widthStyles = {
-  sm: "w-16",
-  md: "w-32",
+  sm: "w-12 md:w-20",
+  md: "w-24 md:w-32",
   lg: "w-64",
   xl: "w-128",
 };
@@ -32,7 +32,7 @@ const TRANSITION_TIME = 1;
 
 export default function HiddenInfo({
   text,
-  placeholder = "",
+  placeholder = "\u00A0",
   reveal,
   width,
 }: HiddenInfoProps) {
@@ -58,7 +58,7 @@ export default function HiddenInfo({
         (isRevealed ? "" : " animate-pulse-subtle")
       }
     >
-      <CardBody className="p-1 text-center text-xs font-semibold md:text-lg">
+      <CardBody className="justify-center p-1 text-center text-xs font-semibold md:text-lg">
         <motion.h3
           initial="show"
           animate={version}

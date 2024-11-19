@@ -22,32 +22,34 @@ export default function Profile({
   reveal,
 }: ProfileProps) {
   return (
-    <div className="align-stretch flex gap-4">
-      <div className="flex flex-col items-end justify-around">
-        <HiddenInfo
-          text={firstName}
-          width="md"
-          placeholder="first"
+    <Card className="rounded-md bg-[#bdbdbd]/30">
+      <CardBody className="align-stretch flex flex-row gap-2 p-1 md:p-4">
+        <div className="flex flex-col items-end justify-around">
+          <HiddenInfo
+            text={firstName}
+            width="md"
+            placeholder="first"
+            reveal={reveal}
+          />
+          <HiddenInfo
+            text={lastName}
+            width="md"
+            placeholder="last"
+            reveal={reveal}
+          />
+          <HiddenInfo
+            text={position}
+            width="sm"
+            placeholder="pos"
+            reveal={reveal}
+          />
+        </div>
+        <Headshot
+          src={img}
+          alt={`${firstName} ${lastName} headshot`}
           reveal={reveal}
         />
-        <HiddenInfo
-          text={lastName}
-          width="md"
-          placeholder="last"
-          reveal={reveal}
-        />
-        <HiddenInfo
-          text={position}
-          width="sm"
-          placeholder="pos"
-          reveal={reveal}
-        />
-      </div>
-      <Headshot
-        src={img}
-        alt={`${firstName} ${lastName} headshot`}
-        reveal={reveal}
-      />
-    </div>
+      </CardBody>
+    </Card>
   );
 }

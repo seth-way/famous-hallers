@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardBody } from "@nextui-org/react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { UserRound } from "lucide-react";
+import Logo from "@/app/assets/svgs/Logo";
 
 type TeamLogoProps = {
   src: string;
@@ -43,19 +43,19 @@ export default function TeamLogo({ src, alt, reveal }: TeamLogoProps) {
   return (
     <Card
       className={
-        "h-20 w-20 rounded-md bg-gradient-to-br from-success-500/60 to-success-100/50 md:h-40 md:w-40" +
+        "h-12 w-12 rounded-md bg-gradient-to-br from-success-500/60 to-success-100/50 p-1 md:h-16 md:w-16 md:p-4" +
         (reveal ? "" : " animate-pulse-subtle")
       }
     >
-      <CardBody className="items-center justify-center py-0">
+      <CardBody className="items-center justify-center p-0">
         <motion.div
-          className="absolute inset-0"
+          className="absolute inset-0 flex items-center justify-center"
           initial="hidden"
           animate={isRevealed ? "revealed" : "hidden"}
           variants={profilePic}
         >
           {version === "default" ? (
-            <UserRound className="text-khaki h-full w-full" />
+            <Logo className="text-khaki-600/90" height="100%" />
           ) : (
             <Image src={src} alt={alt} fill={true} />
           )}
