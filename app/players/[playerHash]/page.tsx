@@ -48,7 +48,7 @@ export default function Page() {
     if (playerHash) fetchPlayerInfo();
   }, [playerHash]);
 
-  if (error || !playerInfo) return <Loading />;
+  if (error || !playerInfo || !revealTracker) return <Loading />;
   console.log(playerInfo);
   const {
     awards,
@@ -80,10 +80,22 @@ export default function Page() {
       </div>
       <div className="flex max-h-full w-auto items-start justify-center gap-2 overflow-y-scroll md:flex-row md:gap-4">
         <div className="flex flex-col gap-2 md:flex-row md:gap-4">
-          <Draft draft={draft} setError={setError} />
-          <Awards awards={awards} />
+          <Draft
+            draft={draft}
+            revealTracker={revealTracker.draft}
+            setError={setError}
+          />
+          <Awards awards={awards} revealTracker={revealTracker.awards} />
         </div>
-        <Teams teams={teams} college={college} setError={setError} />
+        <Teams
+          teams={teams}
+          college={college}
+          revealTracker={{
+            college: revealTracker.college,
+            teams: revealTracker.teams,
+          }}
+          setError={setError}
+        />
       </div>
     </div>
   );

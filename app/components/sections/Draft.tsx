@@ -30,12 +30,20 @@ type ITeam = {
   logo: string;
 };
 
+type ITracker = {
+  logo: boolean;
+  year: boolean;
+  round: boolean;
+  overall: boolean;
+};
+
 type DraftProps = {
   draft: IPlayerInfo["draft"];
+  revealTracker: ITracker | false;
   setError: Dispatch<SetStateAction<string | null>>;
 };
 
-export default function Draft({ draft, setError }: DraftProps) {
+export default function Draft({ draft, revealTracker, setError }: DraftProps) {
   const [draftTeam, setDraftTeam] = useState<ITeam | null>(null);
   const { team, year, round, overall } = draft;
   const drafted =
@@ -81,11 +89,11 @@ export default function Draft({ draft, setError }: DraftProps) {
             <TableRow key="draft-info-1">
               <TableCell>Team:</TableCell>
               <TableCell>
-                {draftTeam && draftTeam.logo ? (
+                {draftTeam && draftTeam.logo && revealTracker ? (
                   <TeamLogo
                     src={draftTeam.logo}
                     alt="Draft Team Logo"
-                    reveal={false}
+                    reveal={revealTracker.logo}
                   />
                 ) : (
                   <DummyLogo />
@@ -95,8 +103,12 @@ export default function Draft({ draft, setError }: DraftProps) {
             <TableRow key="draft-info-2">
               <TableCell>Year:</TableCell>
               <TableCell>
-                {drafted && year ? (
-                  <HiddenInfo text={year} reveal={false} width="sm" />
+                {drafted && year && revealTracker ? (
+                  <HiddenInfo
+                    text={year}
+                    reveal={revealTracker.year}
+                    width="sm"
+                  />
                 ) : (
                   <DummyInfo width="sm" />
                 )}
@@ -106,8 +118,12 @@ export default function Draft({ draft, setError }: DraftProps) {
               <TableCell>Round:</TableCell>
               <TableCell>
                 {" "}
-                {drafted && round ? (
-                  <HiddenInfo text={round} reveal={false} width="sm" />
+                {drafted && round && revealTracker ? (
+                  <HiddenInfo
+                    text={round}
+                    reveal={revealTracker.round}
+                    width="sm"
+                  />
                 ) : (
                   <DummyInfo width="sm" />
                 )}
@@ -117,8 +133,12 @@ export default function Draft({ draft, setError }: DraftProps) {
               <TableCell>Overall:</TableCell>
               <TableCell>
                 {" "}
-                {drafted && overall ? (
-                  <HiddenInfo text={overall} reveal={false} width="sm" />
+                {drafted && overall && revealTracker ? (
+                  <HiddenInfo
+                    text={overall}
+                    reveal={revealTracker.overall}
+                    width="sm"
+                  />
                 ) : (
                   <DummyInfo width="sm" />
                 )}

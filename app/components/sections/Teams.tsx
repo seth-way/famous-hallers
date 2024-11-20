@@ -27,13 +27,24 @@ type ITeam = {
 
 type ITeams = IPlayerInfo["teams"];
 
+type IRevealTracker = {
+  college: boolean;
+  teams: { years: boolean; logo: boolean }[];
+};
+
 type TeamsProps = {
   teams: ITeams;
   college: string;
+  revealTracker: IRevealTracker;
   setError: Dispatch<SetStateAction<string | null>>;
 };
 
-export default function Teams({ teams, college, setError }: TeamsProps) {
+export default function Teams({
+  teams,
+  college,
+  revealTracker,
+  setError,
+}: TeamsProps) {
   const [collegeTeam, setCollegeTeam] = useState<ITeam | null>(null);
   const [teamsInfo, setTeamsInfo] = useState<ITeam[]>([]);
   const router = useRouter();
@@ -63,7 +74,8 @@ export default function Teams({ teams, college, setError }: TeamsProps) {
     };
     if (teams && teams.length) getTeamsInfo();
   }, [teams]);
-
+  console.log("reveal tracker <>", revealTracker);
+  console.log("tracker.teams <>", revealTracker.teams);
   return (
     <Card className="max-h-full rounded-md bg-[#bdbdbd]/30 font-bold">
       <CardHeader className="justify-center p-1 md:p-3">
@@ -82,7 +94,7 @@ export default function Teams({ teams, college, setError }: TeamsProps) {
             <TeamLogo
               src={collegeTeam.logo}
               alt="Draft Team Logo"
-              reveal={true}
+              reveal={revealTracker.college}
             />
           </div>
         )}
@@ -95,13 +107,13 @@ export default function Teams({ teams, college, setError }: TeamsProps) {
               <HiddenInfo
                 text={`${start} - ${end}`}
                 placeholder="XXXX - XXXX"
-                reveal={true}
+                reveal={revealTracker.teams[idx].years}
                 width="md"
               />
               <TeamLogo
                 src={getTeamLogo(team, teamsInfo)}
                 alt="Draft Team Logo"
-                reveal={true}
+                reveal={revealTracker.teams[idx].years}
               />
             </div>
           ))}
