@@ -16,12 +16,25 @@ type ITeam = {
 
 type ITeams = IPlayerInfo["teams"];
 
+type IRevealTracker = {
+  college: boolean;
+  teams: { years: boolean; logo: boolean }[];
+};
+
 type TeamsProps = {
   teams: ITeams;
+  college: string;
+  revealTracker: IRevealTracker;
   setError: Dispatch<SetStateAction<string | null>>;
 };
 
-export default function Teams({ teams, setError }: TeamsProps) {
+export default function Teams({
+  teams,
+  college,
+  revealTracker,
+  setError,
+}: TeamsProps) {
+  const [collegeTeam, setCollegeTeam] = useState<ITeam | null>(null);
   const [teamsInfo, setTeamsInfo] = useState<ITeam[]>([]);
   const router = useRouter();
 
@@ -33,8 +46,14 @@ export default function Teams({ teams, setError }: TeamsProps) {
           return await res.json();
         });
 
-        const results = await Promise.all(fetchTeams);
-        setTeamsInfo(results);
+        const teamsResults = await Promise.all(fetchTeams);
+        setTeamsInfo(teamsResults);
+
+        if (college) {
+          const res = await fetch(`/dummyData/teams/${college}.json`);
+          const collegeInfo = await res.json();
+          setCollegeTeam(collegeInfo);
+        }
       } catch (err) {
         const errorCode =
           err instanceof Error && err.message.includes("404") ? "404" : "500";
@@ -46,27 +65,42 @@ export default function Teams({ teams, setError }: TeamsProps) {
   }, [teams]);
 
   return (
-    <Section heading="Team History">
-      {teamsInfo.length &&
-        teams.map(({ start, end, team }, idx) => (
-          <div
-            className="flex items-center gap-2 md:gap-4"
-            key={`teams-${idx}`}
-          >
+    <Section>
+              {collegeTeam && (
+          <div className="flex items-center gap-2 md:gap-4">
             <HiddenInfo
-              text={`${start} - ${end}`}
+              text="College"
               placeholder="XXXX - XXXX"
               reveal={true}
               width="md"
             />
             <TeamLogo
-              src={getTeamLogo(team, teamsInfo)}
+              src={collegeTeam.logo}
               alt="Draft Team Logo"
-              reveal={true}
+              reveal={revealTracker.college}
             />
           </div>
-        ))}
-    </Section>
+        )}
+        {teamsInfo.length &&
+          teams.map(({ start, end, team }, idx) => (
+            <div
+              className="flex items-center gap-2 md:gap-4"
+              key={`teams-${idx}`}
+            >
+              <HiddenInfo
+                text={`${start} - ${end}`}
+                placeholder="XXXX - XXXX"
+                reveal={revealTracker.teams[idx].years}
+                width="md"
+              />
+              <TeamLogo
+                src={getTeamLogo(team, teamsInfo)}
+                alt="Draft Team Logo"
+                reveal={revealTracker.teams[idx].logo}
+              />
+            </div>
+          ))}
+</Section>
   );
 }
 

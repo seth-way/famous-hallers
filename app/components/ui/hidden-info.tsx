@@ -24,7 +24,7 @@ const info = {
   show: (revealed: boolean) => ({
     opacity: 1,
     filter: "blur(0px)",
-    color: revealed ? "white" : "khaki",
+    color: revealed ? "white" : "var(--khaki)",
   }),
 };
 
@@ -38,7 +38,6 @@ export default function HiddenInfo({
 }: HiddenInfoProps) {
   const [version, setVersion] = useState<"hide" | "show">("show");
   const [isRevealed, setIsRevealed] = useState<boolean>(false);
-  const [displayText, setDisplayText] = useState<string>(placeholder);
   const widthStyle = widthStyles[width];
 
   useEffect(() => {

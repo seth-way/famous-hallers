@@ -7,22 +7,22 @@ type IAwards = IPlayerInfo["awards"];
 
 type AwardsProps = {
   awards: IAwards;
+  revealTracker: boolean[];
 };
 
-export default function Awards({ awards }: AwardsProps) {
-  console.log("AWARDS <>", awards);
+export default function Awards({ awards, revealTracker }: AwardsProps) {
   return (
     <Section heading="Awards">
-      {awards &&
-        awards.map(({ award, count }, idx) => (
-          <div key={`award-${idx}`}>
-            <HiddenInfo
-              text={`${count}X - ${award}`}
-              width="md"
-              reveal={true}
-            />
-          </div>
-        ))}
-    </Section>
+        {awards &&
+          awards.map(({ award, count }, idx) => (
+            <div key={`awards-${idx}`}>
+              <HiddenInfo
+                text={`${count}X - ${award}`}
+                width="md"
+                reveal={revealTracker[idx]}
+              />
+            </div>
+          ))}
+      </Section>
   );
 }
