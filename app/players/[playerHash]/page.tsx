@@ -5,8 +5,10 @@ import { decryptHash } from "@/lib/api";
 import {
   getRevealOrder,
   getRevealTracker,
+  revealElement,
   IRevealTracker,
 } from "@/lib/utils/reveal-order";
+import useTimer from "@/lib/hooks/user-timer";
 import { IPlayerInfo } from "@/lib/types";
 import Loading from "@/app/components/ui/loading";
 import Profile from "@/app/components/sections/Profile";
@@ -15,17 +17,36 @@ import Draft from "@/app/components/sections/Draft";
 import Teams from "@/app/components/sections/Teams";
 import Awards from "@/app/components/sections/Awards";
 
+const NEXT_CLUE_DELAY = 2;
+
 export default function Page() {
   const [playerInfo, setPlayerInfo] = useState<IPlayerInfo | null>(null);
   const [revealOrder, setRevealOrder] = useState<string[]>([]);
   const [revealTracker, setRevealTracker] = useState<IRevealTracker | null>(
     null,
   );
+  const [revealNext, setRevealNext] = useState<number>(0);
   const [revealPlayer, setRevealPlayer] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const scoreRef = useRef<ScoreRef>(null);
   const playerHash = useParams().playerHash as string;
   const router = useRouter();
+  const timer = useTimer();
+  const { time } = timer;
+  //{ college, awards, draft, teams, }
+  useEffect(() => {
+    if (revealTracker && !time) {
+      const nextElement = revealOrder[revealNext];
+      if (nextElement) {
+        revealElement(nextElement, setRevealTracker);
+        timer.reset();
+        timer.start(NEXT_CLUE_DELAY);
+        setRevealNext((prev) => prev + 1);
+      } else {
+        setRevealPlayer(true); // No  more clues... you lose
+      }
+    }
+  }, [time]);
 
   useEffect(() => {
     const fetchPlayerInfo = async () => {
@@ -35,8 +56,11 @@ export default function Page() {
         const player = await res.json();
         if (!player.last_name) throw new Error("error fetching player info");
         setPlayerInfo(player);
-        setRevealOrder(getRevealOrder(player));
-        setRevealTracker(getRevealTracker(player));
+        const order = getRevealOrder(player);
+        setRevealOrder(order);
+        const tracker = getRevealTracker(player);
+        setRevealTracker(tracker);
+        timer.start(2);
       } catch (err) {
         const errorCode =
           err instanceof Error && err.message.includes("404") ? "404" : "500";
@@ -49,7 +73,7 @@ export default function Page() {
   }, [playerHash]);
 
   if (error || !playerInfo || !revealTracker) return <Loading />;
-  console.log(playerInfo);
+
   const {
     awards,
     college,
@@ -61,10 +85,9 @@ export default function Page() {
     position,
     teams,
   } = playerInfo;
-  console.log("TRACKER <>", revealTracker);
-  console.log("ORDER <>", revealOrder);
+
   return (
-    <div className="flex h-full w-full flex-col justify-center gap-2 overflow-hidden md:gap-4 md:px-8 md:pb-16 md:pt-20 px-2 pb-12 pt-[70px] ">
+    <div className="flex h-full w-full flex-col justify-center gap-2 overflow-hidden px-2 pb-12 pt-[70px] md:gap-4 md:px-8 md:pb-16 md:pt-20">
       <div
         className="flex w-full items-stretch justify-center gap-2 md:gap-4"
         onClick={() => setRevealPlayer(true)}
@@ -100,4 +123,3 @@ export default function Page() {
     </div>
   );
 }
-4;

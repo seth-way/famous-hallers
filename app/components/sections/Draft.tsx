@@ -35,7 +35,7 @@ type ITracker = {
 
 type DraftProps = {
   draft: IPlayerInfo["draft"];
-  revealTracker: ITracker | false;
+  revealTracker: ITracker | boolean;
   setError: Dispatch<SetStateAction<string | null>>;
 };
 
@@ -65,64 +65,84 @@ export default function Draft({ draft, revealTracker, setError }: DraftProps) {
 
   return (
     <Section heading="Draft Info">
-        <Table
-          hideHeader
-          removeWrapper
-          aria-label="Player draft info"
-          className="font-bold"
-          classNames={{ td: "p-1 md:p-2" }}
-        >
-          <TableHeader>
-            <TableColumn>LABEL</TableColumn>
-            <TableColumn>INFO</TableColumn>
-          </TableHeader>
-          <TableBody>
-            <TableRow key="draft-info-1">
-              <TableCell>Team:</TableCell>
-              <TableCell>
-                {draftTeam && draftTeam.logo && revealTracker ? (
-                  <TeamLogo
-                    src={draftTeam.logo}
-                    alt="Draft Team Logo"
-                    reveal={revealTracker.logo}
-                  />
-                ) : (
-                  <DummyLogo />
-                )}
-              </TableCell>
-            </TableRow>
-            <TableRow key="draft-info-2">
-              <TableCell>Year:</TableCell>
-              <TableCell>
-                {drafted && year && revealTracker ? (
-                  <HiddenInfo text={year} reveal={revealTracker.year} width="sm" />
-                ) : (
-                  <DummyInfo width="sm" />
-                )}
-              </TableCell>
-            </TableRow>
-            <TableRow key="draft-info-3">
-              <TableCell>Round:</TableCell>
-              <TableCell>
-                {drafted && round && revealTracker ? (
-                  <HiddenInfo text={round} reveal={revealTracker.round} width="sm" />
-                ) : (
-                  <DummyInfo width="sm" />
-                )}
-              </TableCell>
-            </TableRow>
-            <TableRow key="draft-info-4">
-              <TableCell>Overall:</TableCell>
-              <TableCell>
-                {drafted && overall && revealTracker ? (
-                  <HiddenInfo text={overall} reveal={revealTracker.overall} width="sm" />
-                ) : (
-                  <DummyInfo width="sm" />
-                )}
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-</Section>
+      <Table
+        hideHeader
+        removeWrapper
+        aria-label="Player draft info"
+        className="font-bold"
+        classNames={{ td: "p-1 md:p-2" }}
+      >
+        <TableHeader>
+          <TableColumn>LABEL</TableColumn>
+          <TableColumn>INFO</TableColumn>
+        </TableHeader>
+        <TableBody>
+          <TableRow key="draft-info-1">
+            <TableCell>Team:</TableCell>
+            <TableCell>
+              {typeof revealTracker === "boolean" ? (
+                <DummyLogo />
+              ) : draftTeam && draftTeam.logo ? (
+                <TeamLogo
+                  src={draftTeam.logo}
+                  alt="Draft Team Logo"
+                  reveal={revealTracker.logo}
+                />
+              ) : (
+                <DummyLogo />
+              )}
+            </TableCell>
+          </TableRow>
+          <TableRow key="draft-info-2">
+            <TableCell>Year:</TableCell>
+            <TableCell>
+              {typeof revealTracker === "boolean" ? (
+                <HiddenInfo text="Was" reveal={revealTracker} width="md" />
+              ) : drafted && year ? (
+                <HiddenInfo
+                  text={year}
+                  reveal={revealTracker.year}
+                  width="md"
+                />
+              ) : (
+                <DummyLogo />
+              )}
+            </TableCell>
+          </TableRow>
+          <TableRow key="draft-info-3">
+            <TableCell>Round:</TableCell>
+            <TableCell>
+              {typeof revealTracker === "boolean" ? (
+                <HiddenInfo text="Not" reveal={revealTracker} width="md" />
+              ) : drafted && round ? (
+                <HiddenInfo
+                  text={round}
+                  reveal={revealTracker.round}
+                  width="md"
+                />
+              ) : (
+                <DummyLogo />
+              )}
+            </TableCell>
+          </TableRow>
+          <TableRow key="draft-info-4">
+            <TableCell>Overall:</TableCell>
+            <TableCell>
+              {typeof revealTracker === "boolean" ? (
+                <HiddenInfo text="Drafted" reveal={revealTracker} width="md" />
+              ) : drafted && overall ? (
+                <HiddenInfo
+                  text={overall}
+                  reveal={revealTracker.overall}
+                  width="md"
+                />
+              ) : (
+                <DummyLogo />
+              )}
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </Section>
   );
 }
