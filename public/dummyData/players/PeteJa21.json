@@ -5,12 +5,7 @@
   "img": "https://www.pro-football-reference.com/req/20230307/images/headshots/PeteJa21_2019.jpg",
   "college": "ark",
   "league": "NFL",
-  "draft": {
-    "team": "BUF",
-    "year": 2004,
-    "round": 1,
-    "overall": 7
-  },
+  "draft": false,
   "position": "T",
   "teams": [
     {
