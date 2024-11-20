@@ -6,7 +6,8 @@ import {
   CircularProgress,
 } from "@nextui-org/react";
 
-const MAX_SCORE = 2000;
+const MAX_SCORE = 1000;
+const SCORE_PER_SECOND = 5;
 const GUESS_PENALTY = 100;
 
 type ScoreProps = {
@@ -27,7 +28,7 @@ const Score = forwardRef<ScoreRef, ScoreProps>(
       if (!runScoreTimer) return;
 
       const timerId = setInterval(() => {
-        setScore((prevScore) => Math.max(prevScore - 1, 0));
+        setScore((prevScore) => Math.max(prevScore - SCORE_PER_SECOND, 0));
       }, 1000);
 
       return () => clearInterval(timerId); // Cleanup interval on unmount or pause

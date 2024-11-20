@@ -17,7 +17,7 @@ import Draft from "@/app/components/sections/Draft";
 import Teams from "@/app/components/sections/Teams";
 import Awards from "@/app/components/sections/Awards";
 
-const NEXT_CLUE_DELAY = 2;
+const NEXT_CLUE_DELAY = 6; // in seconds
 
 export default function Page() {
   const [playerInfo, setPlayerInfo] = useState<IPlayerInfo | null>(null);
