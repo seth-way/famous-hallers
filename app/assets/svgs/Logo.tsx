@@ -1,6 +1,6 @@
-import React from "react";
+import { SVGProps } from "react";
 
-type LogoProps = React.SVGProps<SVGSVGElement>;
+type LogoProps = SVGProps<SVGSVGElement>;
 
 export default function Logo({ height = "100", ...rest }: LogoProps) {
   return (

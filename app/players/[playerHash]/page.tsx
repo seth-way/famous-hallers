@@ -97,6 +97,7 @@ export default function Page() {
           lastName={lastName}
           position={position}
           img={img}
+          league={league}
           reveal={revealPlayer}
         />
         <Score ref={scoreRef} runScoreTimer={true} guessCount={0} />
