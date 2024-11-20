@@ -29,10 +29,12 @@ type ITeams = IPlayerInfo["teams"];
 
 type TeamsProps = {
   teams: ITeams;
+  college: string;
   setError: Dispatch<SetStateAction<string | null>>;
 };
 
-export default function Teams({ teams, setError }: TeamsProps) {
+export default function Teams({ teams, college, setError }: TeamsProps) {
+  const [collegeTeam, setCollegeTeam] = useState<ITeam | null>(null);
   const [teamsInfo, setTeamsInfo] = useState<ITeam[]>([]);
   const router = useRouter();
 
@@ -44,8 +46,14 @@ export default function Teams({ teams, setError }: TeamsProps) {
           return await res.json();
         });
 
-        const results = await Promise.all(fetchTeams);
-        setTeamsInfo(results);
+        const teamsResults = await Promise.all(fetchTeams);
+        setTeamsInfo(teamsResults);
+
+        if (college) {
+          const res = await fetch(`/dummyData/teams/${college}.json`);
+          const collegeInfo = await res.json();
+          setCollegeTeam(collegeInfo);
+        }
       } catch (err) {
         const errorCode =
           err instanceof Error && err.message.includes("404") ? "404" : "500";
@@ -55,14 +63,29 @@ export default function Teams({ teams, setError }: TeamsProps) {
     };
     if (teams && teams.length) getTeamsInfo();
   }, [teams]);
-  console.log("teams <><>", teams);
+
   return (
     <Card className="max-h-full rounded-md bg-[#bdbdbd]/30 font-bold">
       <CardHeader className="justify-center p-1 md:p-3">
         <h2>Team History</h2>
       </CardHeader>
       <Divider />
-      <CardBody className="flex h-full w-full flex-col items-center gap-2 p-1 md:gap-4 md:p-4">
+      <CardBody className="flex h-full w-full flex-col items-center gap-2 p-2 md:gap-4 md:p-4">
+        {collegeTeam && (
+          <div className="flex items-center gap-2 md:gap-4">
+            <HiddenInfo
+              text="College"
+              placeholder="XXXX - XXXX"
+              reveal={true}
+              width="md"
+            />
+            <TeamLogo
+              src={collegeTeam.logo}
+              alt="Draft Team Logo"
+              reveal={true}
+            />
+          </div>
+        )}
         {teamsInfo.length &&
           teams.map(({ start, end, team }, idx) => (
             <div
@@ -82,40 +105,6 @@ export default function Teams({ teams, setError }: TeamsProps) {
               />
             </div>
           ))}
-        {/*</CardBody> <Table
-          //   hideHeader
-          //   removeWrapper
-          //   aria-label="Player draft info"
-          //   className="font-bold"
-          //   classNames={{ td: "p-1 md:p-2" }}
-          // >
-          //   <TableHeader>
-          //     <TableColumn>YEARS</TableColumn>
-          //     <TableColumn>TEAM</TableColumn>
-          //   </TableHeader>
-          //   <TableBody>
-          //     {teams.map(({ start, end, team }, idx) => (
-          //       <TableRow key={`team-info-${idx}`}>
-          //         <TableCell>
-          //           <HiddenInfo
-          //             text={`${start} - ${end}`}
-          //             placeholder="XXXX - XXXX"
-          //             reveal={true}
-          //             width="md"
-          //           />
-          //         </TableCell>
-          //         <TableCell>
-          //           <TeamLogo
-          //             src={getTeamLogo(team, teamsInfo)}
-          //             alt="Draft Team Logo"
-          //             reveal={true}
-          //           />
-          //         </TableCell>
-          //       </TableRow>
-          //     ))}
-          //   </TableBody>
-          // </Table>
-        // )} */}
       </CardBody>
     </Card>
   );

@@ -10,7 +10,6 @@ type AwardsProps = {
 };
 
 export default function Awards({ awards }: AwardsProps) {
-  console.log("AWARDS <>", awards);
   return (
     <Card className="rounded-md bg-[#bdbdbd]/30 font-bold">
       <CardHeader className="justify-center p-1 md:p-3">

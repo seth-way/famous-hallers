@@ -2,6 +2,11 @@
 import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { decryptHash } from "@/lib/api";
+import {
+  getRevealOrder,
+  getRevealTracker,
+  IRevealTracker,
+} from "@/lib/utils/reveal-order";
 import { IPlayerInfo } from "@/lib/types";
 import Loading from "@/app/components/ui/loading";
 import Profile from "@/app/components/sections/Profile";
@@ -12,6 +17,10 @@ import Awards from "@/app/components/sections/Awards";
 
 export default function Page() {
   const [playerInfo, setPlayerInfo] = useState<IPlayerInfo | null>(null);
+  const [revealOrder, setRevealOrder] = useState<string[]>([]);
+  const [revealTracker, setRevealTracker] = useState<IRevealTracker | null>(
+    null,
+  );
   const [revealPlayer, setRevealPlayer] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const scoreRef = useRef<ScoreRef>(null);
@@ -26,6 +35,8 @@ export default function Page() {
         const player = await res.json();
         if (!player.last_name) throw new Error("error fetching player info");
         setPlayerInfo(player);
+        setRevealOrder(getRevealOrder(player));
+        setRevealTracker(getRevealTracker(player));
       } catch (err) {
         const errorCode =
           err instanceof Error && err.message.includes("404") ? "404" : "500";
@@ -50,7 +61,8 @@ export default function Page() {
     position,
     teams,
   } = playerInfo;
-
+  console.log("TRACKER <>", revealTracker);
+  console.log("ORDER <>", revealOrder);
   return (
     <div className="flex h-full w-full flex-col justify-center gap-2 overflow-hidden md:gap-4">
       <div
@@ -71,7 +83,7 @@ export default function Page() {
           <Draft draft={draft} setError={setError} />
           <Awards awards={awards} />
         </div>
-        <Teams teams={teams} setError={setError} />
+        <Teams teams={teams} college={college} setError={setError} />
       </div>
     </div>
   );
