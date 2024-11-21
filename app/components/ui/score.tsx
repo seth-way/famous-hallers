@@ -35,11 +35,7 @@ const Score = forwardRef<ScoreRef, ScoreProps>(
     }, [runScoreTimer]);
 
     useEffect(() => {
-      console.log("guessCount changed....");
-      if (guessCount) {
-        setScore((prev) => prev - GUESS_PENALTY);
-        console.log("guess count updated");
-      }
+      if (guessCount) setScore((prev) => prev - GUESS_PENALTY);
     }, [guessCount]);
 
     useEffect(() => {
