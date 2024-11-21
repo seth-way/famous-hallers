@@ -13,6 +13,7 @@ const GUESS_PENALTY = 100;
 type ScoreProps = {
   runScoreTimer: boolean;
   guessCount: number;
+  handleTimesUp: () => void;
 };
 
 export type ScoreRef = {
@@ -20,9 +21,8 @@ export type ScoreRef = {
 };
 
 const Score = forwardRef<ScoreRef, ScoreProps>(
-  ({ runScoreTimer, guessCount }, ref) => {
+  ({ runScoreTimer, guessCount, handleTimesUp }, ref) => {
     const [score, setScore] = useState<number>(MAX_SCORE);
-    const [guesses, setGuesses] = useState<number>(0);
 
     useEffect(() => {
       if (!runScoreTimer) return;
@@ -33,6 +33,18 @@ const Score = forwardRef<ScoreRef, ScoreProps>(
 
       return () => clearInterval(timerId); // Cleanup interval on unmount or pause
     }, [runScoreTimer]);
+
+    useEffect(() => {
+      console.log("guessCount changed....");
+      if (guessCount) {
+        setScore((prev) => prev - GUESS_PENALTY);
+        console.log("guess count updated");
+      }
+    }, [guessCount]);
+
+    useEffect(() => {
+      if (!score) handleTimesUp();
+    }, [score]);
 
     useImperativeHandle(ref, () => ({
       getScore: () => score,

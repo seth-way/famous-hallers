@@ -62,7 +62,8 @@ module.exports = {
         card: "0.25rem",
       },
       fontFamily: {
-        slabo: ["var(--font-slabo)", "serif"],
+        headline: ["var(--font-bokor)", "system-ui", "sans-serif"],
+        body: ["var(--font-exo)", "system-ui", "sans-serif"],
         display: ["var(--font-sf)", "system-ui", "sans-serif"],
         default: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
@@ -148,5 +149,8 @@ module.exports = {
     },
   },
   darkMode: "class",
-  plugins: [nextui(), require("@tailwindcss/aspect-ratio")],
+  plugins: [
+    nextui({ defaultTheme: "dark" }),
+    require("@tailwindcss/aspect-ratio"),
+  ],
 };

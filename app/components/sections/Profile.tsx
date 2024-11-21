@@ -3,7 +3,7 @@ import Section from "@/app/components/layout/section";
 import Headshot from "@/app/components/ui/headshot";
 import HiddenInfo from "@/app/components/ui/hidden-info";
 import LeagueIcon from "@/app/components/ui/league-icon";
-import Button from "@/app/components/ui/button";
+import { Button } from "@nextui-org/react";
 
 const widthStyles = {
   sm: "w-12 md:w-20",
@@ -18,7 +18,9 @@ type ProfileProps = {
   position: string;
   img: string;
   league: "MLB" | "NBA" | "NCAA" | "NFL" | "NHL";
+  handleOpenModal: () => void;
   reveal: boolean;
+  completed: boolean;
 };
 
 export default function Profile({
@@ -27,11 +29,13 @@ export default function Profile({
   position,
   img,
   league,
+  handleOpenModal,
   reveal,
+  completed,
 }: ProfileProps) {
   return (
     <Section>
-      <div className="flex max-h-full gap-2 border md:gap-4">
+      <div className="flex max-h-full gap-2 md:gap-4">
         <div className="flex flex-col items-center justify-around">
           <HiddenInfo
             text={firstName}
@@ -54,13 +58,16 @@ export default function Profile({
               reveal={reveal}
             />
           </div>
-          <Button
-            variant="ghost"
-            className="h-auto w-24 border-success-200 bg-khaki p-1 text-xs font-extrabold text-success-300 md:w-32 md:p-2 md:text-base"
-            radius="sm"
-          >
-            Make a Guess
-          </Button>
+          {!completed && (
+            <Button
+              variant="ghost"
+              className="h-auto w-24 border-success-200 bg-khaki p-1 text-xs font-extrabold text-success-300 md:w-32 md:p-2 md:text-base"
+              radius="sm"
+              onPress={handleOpenModal}
+            >
+              Guess Player
+            </Button>
+          )}
         </div>
         <Headshot
           src={img}

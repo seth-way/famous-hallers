@@ -8,6 +8,7 @@ import {
   revealElement,
   IRevealTracker,
 } from "@/lib/utils/reveal-order";
+import { Modal, useDisclosure } from "@nextui-org/react";
 import useTimer from "@/lib/hooks/user-timer";
 import { IPlayerInfo } from "@/lib/types";
 import Loading from "@/app/components/ui/loading";
@@ -16,6 +17,7 @@ import Score, { ScoreRef } from "@/app/components/ui/score";
 import Draft from "@/app/components/sections/Draft";
 import Teams from "@/app/components/sections/Teams";
 import Awards from "@/app/components/sections/Awards";
+import GuessForm from "@/app/components/sections/GuessForm";
 
 const NEXT_CLUE_DELAY = 6; // in seconds
 
@@ -27,13 +29,17 @@ export default function Page() {
   );
   const [revealNext, setRevealNext] = useState<number>(0);
   const [revealPlayer, setRevealPlayer] = useState<boolean>(false);
+  const [guessCount, setGuessCount] = useState<number>(0);
+  const [winner, setWinner] = useState<boolean>(false);
+  const [completed, setCompleted] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const scoreRef = useRef<ScoreRef>(null);
   const playerHash = useParams().playerHash as string;
   const router = useRouter();
   const timer = useTimer();
   const { time } = timer;
-  //{ college, awards, draft, teams, }
+
   useEffect(() => {
     if (revealTracker && !time) {
       const nextElement = revealOrder[revealNext];
@@ -42,8 +48,6 @@ export default function Page() {
         timer.reset();
         timer.start(NEXT_CLUE_DELAY);
         setRevealNext((prev) => prev + 1);
-      } else {
-        setRevealPlayer(true); // No  more clues... you lose
       }
     }
   }, [time]);
@@ -86,8 +90,55 @@ export default function Page() {
     teams,
   } = playerInfo;
 
+  const handleOpenModal = () => {
+    onOpen();
+  };
+
+  const handleWinner = () => {
+    setCompleted(true);
+    setWinner(true);
+    setRevealPlayer(true);
+    setTimeout(() => {
+      revealAllInfo();
+    }, 1000);
+  };
+
+  const handleLoser = () => {
+    setCompleted(true);
+    setRevealPlayer(true);
+    setTimeout(() => {
+      revealAllInfo();
+    }, 1000);
+  };
+
+  const handleIncorrectGuess = () => {
+    setGuessCount((prev) => prev + 1);
+  };
+
+  const handleGuess = (guess: string) => {
+    if (guess.length) {
+      const playerFullName = firstName + " " + lastName;
+      return playerFullName.toLocaleLowerCase() === guess.toLocaleLowerCase()
+        ? handleWinner()
+        : handleIncorrectGuess();
+    }
+  };
+
+  const revealAllInfo = () => {
+    let idx = revealNext;
+    const intervalId = setInterval(() => {
+      const nextElement = revealOrder[idx];
+      if (nextElement) {
+        revealElement(nextElement, setRevealTracker);
+        idx += 1;
+      } else {
+        clearInterval(intervalId);
+      }
+    }, 350);
+  };
+
   return (
-    <div className="flex h-full max-h-[1100px] w-full flex-col justify-center gap-2 overflow-hidden px-2 md:gap-4 md:px-8 md:pb-16">
+    <div className="flex h-full max-h-[1100px] w-full flex-col justify-center gap-2 overflow-hidden px-2 md:gap-4 md:px-8">
       <div
         className="flex max-h-[34%] w-full items-stretch justify-center gap-2 md:gap-4"
         onClick={() => setRevealPlayer(true)}
@@ -99,8 +150,15 @@ export default function Page() {
           img={img}
           league={league}
           reveal={revealPlayer}
+          handleOpenModal={handleOpenModal}
+          completed={completed}
         />
-        <Score ref={scoreRef} runScoreTimer={true} guessCount={0} />
+        <Score
+          ref={scoreRef}
+          runScoreTimer={!completed && !isOpen}
+          guessCount={guessCount}
+          handleTimesUp={handleLoser}
+        />
       </div>
       <div className="flex max-h-[64%] w-auto items-start justify-center gap-2 md:flex-row md:gap-4">
         <div className="flex h-full flex-col gap-2 md:flex-row md:gap-4">
@@ -121,6 +179,16 @@ export default function Page() {
           setError={setError}
         />
       </div>
+      {
+        <Modal
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          backdrop="blur"
+          placement="center"
+        >
+          <GuessForm isOpen={isOpen} handleGuess={handleGuess} />
+        </Modal>
+      }
     </div>
   );
 }
