@@ -10,6 +10,7 @@ export const bokor = Bokor({
 export const exo2 = Exo_2({
   variable: "--font-exo",
   weight: ["300", "400"],
+  subsets: ["cyrillic", "latin"],
 });
 
 export const sfPro = localFont({
