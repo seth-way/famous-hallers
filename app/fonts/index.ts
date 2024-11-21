@@ -3,7 +3,8 @@ import { Inter, Exo_2, Bokor } from "next/font/google";
 
 export const bokor = Bokor({
   variable: "--font-bokor",
-  weight: "400"
+  weight: "400",
+  subsets: ["khmer", "latin"],
 });
 
 export const exo2 = Exo_2({
