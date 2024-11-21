@@ -1,6 +1,7 @@
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
+import { ENV } from "@/env";
 
-const client = postgres(`${process.env.POSTGRES_URL!}?sslmode=require`);
+const client = postgres(`${ENV.POSTGRES_URL!}?sslmode=require`);
 export const db = drizzle(client);
 export default client;

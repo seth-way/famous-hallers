@@ -1,0 +1,55 @@
+{
+  "id": "PeteJa21",
+  "first_name": "Jason",
+  "last_name": "Peters",
+  "img": "https://www.pro-football-reference.com/req/20230307/images/headshots/PeteJa21_2019.jpg",
+  "college": "ark",
+  "league": "NFL",
+  "draft": false,
+  "position": "T",
+  "teams": [
+    {
+      "start": 2004,
+      "end": 2008,
+      "team": "BUF"
+    },
+    {
+      "start": 2009,
+      "end": 2020,
+      "team": "PHI"
+    },
+    {
+      "start": 2021,
+      "end": 2021,
+      "team": "CHI"
+    },
+    {
+      "start": 2022,
+      "end": 2022,
+      "team": "DAL"
+    },
+    {
+      "start": 2023,
+      "end": 2023,
+      "team": "SEA"
+    }
+  ],
+  "awards": [
+    {
+      "award": "Pro Bowl",
+      "count": 9
+    },
+    {
+      "award": "All-Pro",
+      "count": 2
+    },
+    {
+      "award": "SB Champ",
+      "count": 1
+    },
+    {
+      "award": "HOF All-2010s Team",
+      "count": 1
+    }
+  ]
+}

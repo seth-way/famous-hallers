@@ -1,5 +1,15 @@
 import localFont from "next/font/local";
-import { Inter } from "next/font/google";
+import { Inter, Exo_2, Bokor } from "next/font/google";
+
+export const bokor = Bokor({
+  variable: "--font-bokor",
+  weight: "400"
+});
+
+export const exo2 = Exo_2({
+  variable: "--font-exo",
+  weight: ["300", "400"],
+});
 
 export const sfPro = localFont({
   src: "./SF-Pro-Display-Medium.otf",
