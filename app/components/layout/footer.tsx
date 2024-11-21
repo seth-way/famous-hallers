@@ -1,7 +1,7 @@
 import { Github, Linkedin } from "lucide-react";
 export default function Footer() {
   return (
-    <div className="absolute bottom-0 flex max-h-[10%] w-full items-center justify-center gap-4 py-5 text-center">
+    <div className="absolute bottom-0 flex max-h-[10%] max-h-[5vh] w-full items-center justify-center gap-4 py-5 text-center">
       <p className="text-gray-500">
         A project by{" "}
         <a

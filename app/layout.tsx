@@ -1,6 +1,6 @@
 import "./globals.css";
 import cx from "classnames";
-import { sfPro, inter } from "@/app/fonts";
+import { sfPro, exo2, inter } from "@/app/fonts";
 import { Suspense } from "react";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import Providers from "@/app/providers";
@@ -19,9 +19,9 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en" className="bg-black">
-      <body className={cx(sfPro.variable, inter.variable)}>
+      <body className={cx(exo2.variable, inter.variable, sfPro.variable)}>
         <Providers>
-          <main className="relative flex min-h-screen w-full flex-col items-center bg-background text-foreground dark">
+          <main className="font-exo relative flex min-h-screen w-full flex-col items-center bg-background text-foreground dark">
             <Suspense fallback="...">
               <Navbar />
             </Suspense>

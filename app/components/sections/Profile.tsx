@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Section from "@/app/components/ui/section";
+import Section from "@/app/components/layout/section";
 import Headshot from "@/app/components/ui/headshot";
 import HiddenInfo from "@/app/components/ui/hidden-info";
 import LeagueIcon from "@/app/components/ui/league-icon";
@@ -31,7 +31,7 @@ export default function Profile({
 }: ProfileProps) {
   return (
     <Section>
-      <div className="flex gap-2 md:gap-4">
+      <div className="flex max-h-full gap-2 border md:gap-4">
         <div className="flex flex-col items-center justify-around">
           <HiddenInfo
             text={firstName}

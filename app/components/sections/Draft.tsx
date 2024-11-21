@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
-import Section from "@/app/components/ui/section";
+import Section from "@/app/components/layout/section";
 import {
   Table,
   TableHeader,

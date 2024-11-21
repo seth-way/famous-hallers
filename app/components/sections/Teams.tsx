@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
-import Section from "@/app/components/ui/section";
+import Section from "@/app/components/layout/section";
 import HiddenInfo from "@/app/components/ui/hidden-info";
 import TeamLogo from "@/app/components/ui/team-logo";
 import { IPlayerInfo, IAnyTeam } from "@/lib/types";
@@ -66,41 +66,41 @@ export default function Teams({
 
   return (
     <Section>
-              {collegeTeam && (
-          <div className="flex items-center gap-2 md:gap-4">
+      {collegeTeam && (
+        <div className="flex items-center gap-2 md:gap-4">
+          <HiddenInfo
+            text="College"
+            placeholder="XXXX - XXXX"
+            reveal={true}
+            width="md"
+          />
+          <TeamLogo
+            src={collegeTeam.logo}
+            alt="Draft Team Logo"
+            reveal={revealTracker.college}
+          />
+        </div>
+      )}
+      {teamsInfo.length &&
+        teams.map(({ start, end, team }, idx) => (
+          <div
+            className="flex items-center gap-2 md:gap-4"
+            key={`teams-${idx}`}
+          >
             <HiddenInfo
-              text="College"
+              text={`${start} - ${end}`}
               placeholder="XXXX - XXXX"
-              reveal={true}
+              reveal={revealTracker.teams[idx].years}
               width="md"
             />
             <TeamLogo
-              src={collegeTeam.logo}
+              src={getTeamLogo(team, teamsInfo)}
               alt="Draft Team Logo"
-              reveal={revealTracker.college}
+              reveal={revealTracker.teams[idx].logo}
             />
           </div>
-        )}
-        {teamsInfo.length &&
-          teams.map(({ start, end, team }, idx) => (
-            <div
-              className="flex items-center gap-2 md:gap-4"
-              key={`teams-${idx}`}
-            >
-              <HiddenInfo
-                text={`${start} - ${end}`}
-                placeholder="XXXX - XXXX"
-                reveal={revealTracker.teams[idx].years}
-                width="md"
-              />
-              <TeamLogo
-                src={getTeamLogo(team, teamsInfo)}
-                alt="Draft Team Logo"
-                reveal={revealTracker.teams[idx].logo}
-              />
-            </div>
-          ))}
-</Section>
+        ))}
+    </Section>
   );
 }
 

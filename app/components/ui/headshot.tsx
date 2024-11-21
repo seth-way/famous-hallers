@@ -43,7 +43,7 @@ export default function Headshot({ src, alt, reveal }: HeadshotProps) {
   return (
     <Card
       className={
-        "h-32 w-20 rounded-md bg-gradient-to-br from-success-500/60 to-success-100/50 md:h-60 md:w-40" +
+        "aspect-2/3 h-32 max-h-full rounded-md bg-gradient-to-br from-success-500/60 to-success-100/50 md:h-60" +
         (reveal ? "" : " animate-pulse-subtle")
       }
     >
@@ -55,7 +55,7 @@ export default function Headshot({ src, alt, reveal }: HeadshotProps) {
           variants={profilePic}
         >
           {version === "default" ? (
-            <UserRound className="text-khaki h-full w-full" />
+            <UserRound className="h-full w-full text-khaki" />
           ) : (
             <Image src={src} alt={alt} fill={true} />
           )}

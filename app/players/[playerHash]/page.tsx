@@ -87,9 +87,9 @@ export default function Page() {
   } = playerInfo;
 
   return (
-    <div className="flex h-full w-full flex-col justify-center gap-2 overflow-hidden px-2 pb-12 pt-[70px] md:gap-4 md:px-8 md:pb-16 md:pt-20">
+    <div className="flex h-full max-h-[1100px] w-full flex-col justify-center gap-2 overflow-hidden px-2 md:gap-4 md:px-8 md:pb-16">
       <div
-        className="flex w-full items-stretch justify-center gap-2 md:gap-4"
+        className="flex max-h-[34%] w-full items-stretch justify-center gap-2 md:gap-4"
         onClick={() => setRevealPlayer(true)}
       >
         <Profile
@@ -102,8 +102,8 @@ export default function Page() {
         />
         <Score ref={scoreRef} runScoreTimer={true} guessCount={0} />
       </div>
-      <div className="flex max-h-full w-auto items-start justify-center gap-2 md:flex-row md:gap-4">
-        <div className="flex flex-col gap-2 md:flex-row md:gap-4">
+      <div className="flex max-h-[64%] w-auto items-start justify-center gap-2 md:flex-row md:gap-4">
+        <div className="flex h-full flex-col gap-2 md:flex-row md:gap-4">
           <Draft
             draft={draft}
             revealTracker={revealTracker.draft}

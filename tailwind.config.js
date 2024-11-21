@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const { nextui } = require("@nextui-org/react");
+//const aspectRatio = require("@tailwindcss/aspect-ratio");
 const nextColors = nextui().config.theme.extend.colors;
 
 const colors = {
@@ -61,8 +62,12 @@ module.exports = {
         card: "0.25rem",
       },
       fontFamily: {
+        slabo: ["var(--font-slabo)", "serif"],
         display: ["var(--font-sf)", "system-ui", "sans-serif"],
         default: ["var(--font-inter)", "system-ui", "sans-serif"],
+      },
+      aspectRatio: {
+        "2/3": "2 / 3", // Add the custom ratio
       },
       animation: {
         // Fade up, down
@@ -143,5 +148,5 @@ module.exports = {
     },
   },
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [nextui(), require("@tailwindcss/aspect-ratio")],
 };
