@@ -13,7 +13,7 @@ import useTimer from "@/lib/hooks/user-timer";
 import { IPlayerInfo } from "@/lib/types";
 import Loading from "@/app/components/ui/loading";
 import Profile from "@/app/components/sections/Profile";
-import Score, { ScoreRef } from "@/app/components/ui/score";
+import Score, { ScoreRef } from "@/app/components/sections/Scoretemp";
 import Draft from "@/app/components/sections/Draft";
 import Teams from "@/app/components/sections/Teams";
 import Awards from "@/app/components/sections/Awards";
