@@ -43,7 +43,7 @@ export default function TeamLogo({ src, alt, reveal }: TeamLogoProps) {
   return (
     <Card
       className={
-        "h-10 w-10 rounded-md bg-gradient-to-br from-success-500/60 to-success-100/50 p-0 md:h-16 md:w-16" +
+        "h-10 w-10 rounded-md bg-gradient-to-br from-success-400 to-success-50 p-0 md:h-16 md:w-16" +
         (reveal ? "" : " animate-pulse-subtle")
       }
     >

@@ -6,15 +6,18 @@ import { motion, AnimatePresence } from "framer-motion";
 const motionVariants = {
   hidden: {
     opacity: 0,
-    scaleX: 0,
+    scale: 0,
     transition: { duration: 0 },
   },
   highlight: {
-    opacity: [1, 1, 1],
-    scaleX: [0, 1, 0],
-    top: 0,
-    left: [0, 0, 1],
-    transition: { type: "ease", duration: 8, times: [0, 0.5, 1] },
+    opacity: [0, 1, 0],
+    scale: [0, 1, 1],
+    transition: {
+      type: "easeInOut",
+      duration: 1,
+      delay: 1,
+      times: [0, 0.65, 1],
+    },
   },
 };
 
@@ -32,7 +35,7 @@ export default function Section({
   children,
 }: SectionProps) {
   return (
-    <Card className="relative max-h-full rounded-md border border-white/30 bg-[#bdbdbd]/30 font-bold">
+    <Card className="relative z-20 max-h-full rounded-md border border-white/30 bg-[#bdbdbd]/30 font-bold">
       {heading && (
         <>
           <CardHeader className="justify-center p-1 md:p-3">
@@ -47,7 +50,7 @@ export default function Section({
       <AnimatePresence initial={false}>
         {highlight && (
           <motion.div
-            className="absolute bg-white/80"
+            className="absolute left-0 top-0 z-10 h-full w-full origin-center overflow-visible rounded-lg bg-gradient-to-br from-white/20 to-success-300/20 blur-lg"
             key={highlightKey}
             variants={motionVariants}
             initial="hidden"

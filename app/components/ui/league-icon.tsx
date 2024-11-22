@@ -19,7 +19,7 @@ const leagueLogos = {
 
 export default function LeagueIcon({ league }: LeagueIconProps) {
   return (
-    <Card className="w-10 animate-pulse-subtle rounded-md bg-gradient-to-br from-success-500/60 to-success-100/50 text-center md:w-16">
+    <Card className="w-10 animate-pulse-subtle rounded-md bg-gradient-to-br from-success-400 to-success-50 text-center md:w-16">
       <CardBody className="justify-center p-1 text-center text-xs font-semibold md:text-lg">
         {leagueLogos[league]}
       </CardBody>

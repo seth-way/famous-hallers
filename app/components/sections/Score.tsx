@@ -67,8 +67,12 @@ const Score = forwardRef<ScoreRef, ScoreProps>(
     }));
     // h-24 md:h-60
     return (
-      <Section heading="Score" highlightKey="score-section" highlight={highlight}>
-        <Card className="relative aspect-square h-full w-20 rounded-md bg-gradient-to-br from-success-500/60 to-success-100/50 text-xs font-semibold md:w-40 md:text-2xl">
+      <Section
+        heading="Score"
+        highlightKey="score-section"
+        highlight={highlight}
+      >
+        <Card className="relative aspect-square h-full w-20 rounded-md bg-gradient-to-br from-success-400 to-success-50 text-xs font-semibold md:w-40 md:text-2xl">
           <CardBody className="items-center justify-center py-0">
             <CircularProgress
               classNames={{

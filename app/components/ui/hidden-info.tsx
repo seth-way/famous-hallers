@@ -53,7 +53,7 @@ export default function HiddenInfo({
   return (
     <Card
       className={
-        `rounded-md bg-gradient-to-br from-success-500/60 to-success-100/50 text-center ${widthStyle}` +
+        `rounded-md bg-gradient-to-br from-success-400 to-success-50 text-center ${widthStyle}` +
         (isRevealed ? "" : " animate-pulse-subtle")
       }
     >

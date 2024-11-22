@@ -68,7 +68,6 @@ export default function Teams({
   useEffect(() => {
     const trackerString = JSON.stringify(revealTracker);
     if (trackerString.length && trackerString.includes("true")) {
-      console.log("highlighting teams section.");
       setHighlight(true);
       setTimeout(() => {
         setHighlight(false);
