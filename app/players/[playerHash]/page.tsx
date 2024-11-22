@@ -13,7 +13,7 @@ import useTimer from "@/lib/hooks/user-timer";
 import { IPlayerInfo } from "@/lib/types";
 import Loading from "@/app/components/ui/loading";
 import Profile from "@/app/components/sections/Profile";
-import Score, { ScoreRef } from "@/app/components/sections/Scoretemp";
+import Score, { ScoreRef } from "@/app/components/sections/Score";
 import Draft from "@/app/components/sections/Draft";
 import Teams from "@/app/components/sections/Teams";
 import Awards from "@/app/components/sections/Awards";
@@ -138,7 +138,7 @@ export default function Page() {
   };
 
   return (
-    <div className="flex h-full max-h-[1100px] w-full flex-col justify-center gap-2 overflow-hidden px-2 md:gap-4 md:px-8">
+    <div className="flex h-full max-h-[1100px] w-full flex-col justify-center gap-2 overflow-hidden px-2 py-2 md:gap-4 md:px-8">
       <div
         className="flex max-h-[34%] w-full items-stretch justify-center gap-2 md:gap-4"
         onClick={() => setRevealPlayer(true)}
