@@ -33,8 +33,19 @@ export default function Profile({
   reveal,
   completed,
 }: ProfileProps) {
+  const [highlight, setHighlight] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (reveal) {
+      setHighlight(true);
+      setTimeout(() => {
+        setHighlight(false);
+      }, 3000);
+    }
+  }, [reveal]);
+
   return (
-    <Section>
+    <Section highlightKey="profile-section" highlight={highlight}>
       <div className="flex max-h-full gap-2 md:gap-4">
         <div className="flex flex-col items-center justify-around">
           <HiddenInfo

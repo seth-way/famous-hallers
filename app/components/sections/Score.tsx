@@ -7,7 +7,7 @@ const MAX_SCORE = 1000;
 const SCORE_PER_SECOND = 5;
 const GUESS_PENALTY = 100;
 
-const indicatorVariants = {
+const motionVariants = {
   hidden: {
     opacity: 0,
     y: 0,
@@ -35,6 +35,7 @@ export type ScoreRef = {
 const Score = forwardRef<ScoreRef, ScoreProps>(
   ({ runScoreTimer, guessCount, handleTimesUp }, ref) => {
     const [score, setScore] = useState<number>(MAX_SCORE);
+    const [highlight, setHighlight] = useState<boolean>(false);
     const [showIndicator, setShowIndicator] = useState<boolean>(false);
 
     useEffect(() => {
@@ -66,7 +67,7 @@ const Score = forwardRef<ScoreRef, ScoreProps>(
     }));
     // h-24 md:h-60
     return (
-      <Section heading="Score">
+      <Section heading="Score" highlightKey="score-section" highlight={highlight}>
         <Card className="relative aspect-square h-full w-20 rounded-md bg-gradient-to-br from-success-500/60 to-success-100/50 text-xs font-semibold md:w-40 md:text-2xl">
           <CardBody className="items-center justify-center py-0">
             <CircularProgress
@@ -86,9 +87,9 @@ const Score = forwardRef<ScoreRef, ScoreProps>(
             <AnimatePresence>
               {showIndicator && (
                 <motion.p
-                  className="absolute rounded-xl border-success-300 bg-success-300/60 p-2"
+                  className="absolute rounded-xl border-success-100 bg-white/70 p-2 font-bold text-red-700"
                   key="bad-guess-indicator"
-                  variants={indicatorVariants}
+                  variants={motionVariants}
                   initial="hidden"
                   animate="visible"
                   exit="hidden"

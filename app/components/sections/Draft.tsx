@@ -41,6 +41,7 @@ type DraftProps = {
 
 export default function Draft({ draft, revealTracker, setError }: DraftProps) {
   const [draftTeam, setDraftTeam] = useState<ITeam | null>(null);
+  const [highlight, setHighlight] = useState<boolean>(false);
   const { team, year, round, overall } = draft;
   const drafted =
     Object.values(draft).filter((value) => value !== null).length > 0;
@@ -63,8 +64,22 @@ export default function Draft({ draft, revealTracker, setError }: DraftProps) {
     if (draft && drafted) getTeamInfo();
   }, [draft]);
 
+  useEffect(() => {
+    const tracker = JSON.stringify(revealTracker);
+    if (tracker.length && tracker.includes("true")) {
+      setHighlight(true);
+      setTimeout(() => {
+        setHighlight(false);
+      }, 3000);
+    }
+  }, [JSON.stringify(revealTracker)]);
+
   return (
-    <Section heading="Draft Info">
+    <Section
+      heading="Draft Info"
+      highlightKey="draft-section"
+      highlight={highlight}
+    >
       <Table
         hideHeader
         removeWrapper
