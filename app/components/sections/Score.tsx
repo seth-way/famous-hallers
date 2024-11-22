@@ -1,15 +1,26 @@
 import { useState, useEffect, useImperativeHandle, forwardRef } from "react";
 import Section from "@/app/components/layout/section";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  CircularProgress,
-} from "@nextui-org/react";
+import { Card, CardBody, CircularProgress } from "@nextui-org/react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const MAX_SCORE = 1000;
 const SCORE_PER_SECOND = 5;
 const GUESS_PENALTY = 100;
+
+const indicatorVariants = {
+  hidden: {
+    opacity: 0,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0 },
+  },
+  visible: {
+    opacity: 1,
+    y: 30,
+    scale: 1.2,
+    transition: { type: "spring", duration: 2 },
+  },
+};
 
 type ScoreProps = {
   runScoreTimer: boolean;
@@ -24,6 +35,7 @@ export type ScoreRef = {
 const Score = forwardRef<ScoreRef, ScoreProps>(
   ({ runScoreTimer, guessCount, handleTimesUp }, ref) => {
     const [score, setScore] = useState<number>(MAX_SCORE);
+    const [showIndicator, setShowIndicator] = useState<boolean>(false);
 
     useEffect(() => {
       if (!runScoreTimer) return;
@@ -36,7 +48,13 @@ const Score = forwardRef<ScoreRef, ScoreProps>(
     }, [runScoreTimer]);
 
     useEffect(() => {
-      if (guessCount) setScore((prev) => prev - GUESS_PENALTY);
+      if (guessCount) {
+        setShowIndicator(true);
+        setScore((prev) => prev - GUESS_PENALTY);
+        setTimeout(() => {
+          setShowIndicator(false);
+        }, 1500);
+      }
     }, [guessCount]);
 
     useEffect(() => {
@@ -65,6 +83,18 @@ const Score = forwardRef<ScoreRef, ScoreProps>(
               maxValue={MAX_SCORE}
               label={`${score} pts`}
             />
+            <AnimatePresence>
+              {showIndicator && (
+                <motion.p
+                  className="absolute rounded-xl border-success-300 bg-success-300/60 p-2"
+                  key="bad-guess-indicator"
+                  variants={indicatorVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                >{`-${GUESS_PENALTY} points`}</motion.p>
+              )}
+            </AnimatePresence>
           </CardBody>
         </Card>
       </Section>
