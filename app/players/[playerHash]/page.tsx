@@ -139,10 +139,7 @@ export default function Page() {
 
   return (
     <div className="flex h-full max-h-[1100px] w-full flex-col justify-center gap-2 overflow-hidden px-2 py-2 md:gap-4 md:px-8">
-      <div
-        className="flex max-h-[34%] w-full items-stretch justify-center gap-2 md:gap-4"
-        onClick={() => setRevealPlayer(true)}
-      >
+      <div className="flex max-h-[34%] w-full items-stretch justify-center gap-2 md:gap-4">
         <Profile
           firstName={firstName}
           lastName={lastName}

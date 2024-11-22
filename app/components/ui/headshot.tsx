@@ -43,7 +43,7 @@ export default function Headshot({ src, alt, reveal }: HeadshotProps) {
   return (
     <Card
       className={
-        "aspect-2/3 h-32 max-h-full rounded-md bg-gradient-to-br from-success-500/60 to-success-100/50 md:h-60" +
+        "aspect-2/3 h-32 max-h-full rounded-md bg-gradient-to-br from-success-400 to-success-50 md:h-60" +
         (reveal ? "" : " animate-pulse-subtle")
       }
     >

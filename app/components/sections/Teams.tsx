@@ -36,6 +36,7 @@ export default function Teams({
 }: TeamsProps) {
   const [collegeTeam, setCollegeTeam] = useState<ITeam | null>(null);
   const [teamsInfo, setTeamsInfo] = useState<ITeam[]>([]);
+  const [highlight, setHighlight] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -64,8 +65,18 @@ export default function Teams({
     if (teams && teams.length) getTeamsInfo();
   }, [teams]);
 
+  useEffect(() => {
+    const trackerString = JSON.stringify(revealTracker);
+    if (trackerString.length && trackerString.includes("true")) {
+      setHighlight(true);
+      setTimeout(() => {
+        setHighlight(false);
+      }, 3000);
+    }
+  }, [JSON.stringify(revealTracker)]);
+
   return (
-    <Section>
+    <Section highlight={highlight} highlightKey="teams-section">
       {collegeTeam && (
         <div className="flex items-center gap-2 md:gap-4">
           <HiddenInfo
