@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Section from "@/app/components/layout/section";
 import HiddenInfo from "@/app/components/ui/hidden-info";
 import TeamLogo from "@/app/components/ui/team-logo";
-import { IPlayerInfo, IAnyTeam } from "@/lib/types";
+import { IPlayerInfo, IAnyTeam, ILeague } from "@/lib/types";
 
 type ITeam = {
   abbr: IAnyTeam;
@@ -23,7 +23,7 @@ type IRevealTracker = {
 
 type TeamsProps = {
   teams: ITeams;
-  league: "MLB" | "NBA" | "NFL" | "NHL";
+  league: ILeague;
   college: string;
   revealTracker: IRevealTracker;
   setError: Dispatch<SetStateAction<string | null>>;

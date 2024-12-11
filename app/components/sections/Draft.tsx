@@ -11,7 +11,7 @@ import {
   TableCell,
 } from "@nextui-org/react";
 
-import { IPlayerInfo } from "@/lib/types";
+import { IPlayerInfo, ILeague } from "@/lib/types";
 
 import TeamLogo from "@/app/components/ui/team-logo";
 import HiddenInfo from "@/app/components/ui/hidden-info";
@@ -35,7 +35,7 @@ type ITracker = {
 
 type DraftProps = {
   draft: IPlayerInfo["draft"];
-  league: "MLB" | "NBA" | "NFL" | "NHL";
+  league: ILeague;
   revealTracker: ITracker | boolean;
   setError: Dispatch<SetStateAction<string | null>>;
 };
