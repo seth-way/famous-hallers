@@ -1,0 +1,50 @@
+{
+    "id": "GretzWa01",
+    "first_name": "Wayne",
+    "last_name": "Gretzky",
+    "img": "https://www.hockey-reference.com/req/202301051/images/headshots/gretzwa01.jpg",
+    "college": null,
+    "league": "NHL",
+    "draft": false,
+    "position": "C",
+    "teams": [
+      {
+        "start": 1979,
+        "end": 1988,
+        "team": "EDM"
+      },
+      {
+        "start": 1988,
+        "end": 1996,
+        "team": "LAK"
+      },
+      {
+        "start": 1996,
+        "end": 1996,
+        "team": "STL"
+      },
+      {
+        "start": 1996,
+        "end": 1999,
+        "team": "NYR"
+      }
+    ],
+    "awards": [
+      {
+        "award": "Hart Trophy",
+        "count": 9
+      },
+      {
+        "award": "Stanley Cup Champ",
+        "count": 4
+      },
+      {
+        "award": "All-Star",
+        "count": 18
+      },
+      {
+        "award": "Conn Smythe Trophy",
+        "count": 2
+      }
+    ]
+  }

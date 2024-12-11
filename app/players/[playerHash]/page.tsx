@@ -161,6 +161,7 @@ export default function Page() {
         <div className="flex h-full flex-col gap-2 md:flex-row md:gap-4">
           <Draft
             draft={draft}
+            league={league}
             revealTracker={revealTracker.draft}
             setError={setError}
           />
@@ -168,6 +169,7 @@ export default function Page() {
         </div>
         <Teams
           teams={teams}
+          league={league}
           college={college}
           revealTracker={{
             college: revealTracker.college,
