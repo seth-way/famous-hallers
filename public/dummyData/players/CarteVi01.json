@@ -1,0 +1,75 @@
+{
+    "id": "CarteVi01",
+    "first_name": "Vince",
+    "last_name": "Carter",
+    "img": "https://www.basketball-reference.com/req/202106291/images/headshots/cartevi01.jpg",
+    "college": "UNC",
+    "league": "NBA",
+    "draft": {
+      "team": "GSW",
+      "year": 1998,
+      "round": 1,
+      "overall": 5
+    },
+    "position": "SG/SF",
+    "teams": [
+      {
+        "start": 1998,
+        "end": 2004,
+        "team": "TOR"
+      },
+      {
+        "start": 2004,
+        "end": 2009,
+        "team": "NJN"
+      },
+      {
+        "start": 2009,
+        "end": 2010,
+        "team": "ORL"
+      },
+      {
+        "start": 2010,
+        "end": 2011,
+        "team": "PHX"
+      },
+      {
+        "start": 2011,
+        "end": 2014,
+        "team": "DAL"
+      },
+      {
+        "start": 2014,
+        "end": 2017,
+        "team": "MEM"
+      },
+      {
+        "start": 2017,
+        "end": 2018,
+        "team": "SAC"
+      },
+      {
+        "start": 2018,
+        "end": 2020,
+        "team": "ATL"
+      }
+    ],
+    "awards": [
+      {
+        "award": "NBA All-Star",
+        "count": 8
+      },
+      {
+        "award": "All-NBA Team",
+        "count": 2
+      },
+      {
+        "award": "Slam Dunk Contest Champion",
+        "count": 1
+      },
+      {
+        "award": "Twyman-Stokes Teammate of the Year",
+        "count": 1
+      }
+    ]
+  }

@@ -11,7 +11,7 @@ import {
   TableCell,
 } from "@nextui-org/react";
 
-import { IPlayerInfo } from "@/lib/types";
+import { IPlayerInfo, ILeague } from "@/lib/types";
 
 import TeamLogo from "@/app/components/ui/team-logo";
 import HiddenInfo from "@/app/components/ui/hidden-info";
@@ -35,11 +35,17 @@ type ITracker = {
 
 type DraftProps = {
   draft: IPlayerInfo["draft"];
+  league: ILeague;
   revealTracker: ITracker | boolean;
   setError: Dispatch<SetStateAction<string | null>>;
 };
 
-export default function Draft({ draft, revealTracker, setError }: DraftProps) {
+export default function Draft({
+  draft,
+  league,
+  revealTracker,
+  setError,
+}: DraftProps) {
   const [draftTeam, setDraftTeam] = useState<ITeam | null>(null);
   const [highlight, setHighlight] = useState<boolean>(false);
   const { team, year, round, overall } = draft;
@@ -50,7 +56,7 @@ export default function Draft({ draft, revealTracker, setError }: DraftProps) {
   useEffect(() => {
     const getTeamInfo = async () => {
       try {
-        const res = await fetch(`/dummyData/teams/${team}.json`);
+        const res = await fetch(`/dummyData/teams/${league}/${team}.json`);
         const teamInfo = await res.json();
         if (!teamInfo.logo) throw new Error("Error fetching draft team info.");
         setDraftTeam(teamInfo);

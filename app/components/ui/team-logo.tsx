@@ -49,7 +49,7 @@ export default function TeamLogo({ src, alt, reveal }: TeamLogoProps) {
     >
       <CardBody className="relative h-full w-full p-1">
         <motion.div
-          className="flex h-full w-full items-center justify-center p-1"
+          className="relative flex h-full w-full items-center justify-center p-1"
           initial="hidden"
           animate={isRevealed ? "revealed" : "hidden"}
           variants={profilePic}
@@ -57,7 +57,14 @@ export default function TeamLogo({ src, alt, reveal }: TeamLogoProps) {
           {version === "default" ? (
             <Logo className="text-khaki" height="100%" />
           ) : (
-            <Image src={src} alt={alt} height={100} width={100} />
+            <div className="absolute inset-1.5">
+              <Image
+                src={src}
+                alt={alt}
+                fill
+                style={{ objectFit: "contain" }}
+              />
+            </div>
           )}
         </motion.div>
       </CardBody>

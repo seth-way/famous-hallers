@@ -1,0 +1,60 @@
+{
+    "id": "ClemeRo02",
+    "first_name": "Roger",
+    "last_name": "Clemens",
+    "img": "https://www.baseball-reference.com/req/202411210/images/headshots/b/b5a2be2f_br.jpg",
+    "college": "TEX",
+    "league": "MLB",
+    "draft": {
+      "team": "BOS",
+      "year": 1983,
+      "round": 1,
+      "overall": 19
+    },
+    "position": "P",
+    "teams": [
+      {
+        "start": 1984,
+        "end": 1996,
+        "team": "BOS"
+      },
+      {
+        "start": 1997,
+        "end": 1998,
+        "team": "TOR"
+      },
+      {
+        "start": 1999,
+        "end": 2003,
+        "team": "NYY"
+      },
+      {
+        "start": 2004,
+        "end": 2006,
+        "team": "HOU"
+      },
+      {
+        "start": 2007,
+        "end": 2007,
+        "team": "NYY"
+      }
+    ],
+    "awards": [
+      {
+        "award": "Cy Young Award",
+        "count": 7
+      },
+      {
+        "award": "MVP",
+        "count": 1
+      },
+      {
+        "award": "All-Star",
+        "count": 11
+      },
+      {
+        "award": "World Series Champ",
+        "count": 2
+      }
+    ]
+  }

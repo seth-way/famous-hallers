@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Section from "@/app/components/layout/section";
 import HiddenInfo from "@/app/components/ui/hidden-info";
 import TeamLogo from "@/app/components/ui/team-logo";
-import { IPlayerInfo, IAnyTeam } from "@/lib/types";
+import { IPlayerInfo, IAnyTeam, ILeague } from "@/lib/types";
 
 type ITeam = {
   abbr: IAnyTeam;
@@ -23,6 +23,7 @@ type IRevealTracker = {
 
 type TeamsProps = {
   teams: ITeams;
+  league: ILeague;
   college: string;
   revealTracker: IRevealTracker;
   setError: Dispatch<SetStateAction<string | null>>;
@@ -30,6 +31,7 @@ type TeamsProps = {
 
 export default function Teams({
   teams,
+  league,
   college,
   revealTracker,
   setError,
@@ -43,7 +45,7 @@ export default function Teams({
     const getTeamsInfo = async () => {
       try {
         const fetchTeams = teams.map(async ({ team }) => {
-          const res = await fetch(`/dummyData/teams/${team}.json`);
+          const res = await fetch(`/dummyData/teams/${league}/${team}.json`);
           return await res.json();
         });
 
@@ -51,7 +53,7 @@ export default function Teams({
         setTeamsInfo(teamsResults);
 
         if (college) {
-          const res = await fetch(`/dummyData/teams/${college}.json`);
+          const res = await fetch(`/dummyData/teams/NCAA/${college}.json`);
           const collegeInfo = await res.json();
           setCollegeTeam(collegeInfo);
         }
